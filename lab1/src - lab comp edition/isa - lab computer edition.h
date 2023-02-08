@@ -22,7 +22,6 @@
 //
 #define SIGNEXT(v, sb) ((v) | (((v) & (1 << (sb))) ? ~((1 << (sb))-1) : 0))
 
-//Tested 
 int ADD (int Rd, int Rs1, int Rs2, int Funct3) {
 
   int cur = 0;
@@ -31,12 +30,14 @@ int ADD (int Rd, int Rs1, int Rs2, int Funct3) {
   return 0;
 
 }
-//Tested
+
 int ADDI (int Rd, int Rs1, int Imm, int Funct3) {
+
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm,12);
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
+
 }
 
 int BNE (int Rs1, int Rs2, int Imm, int Funct3) {
@@ -65,23 +66,8 @@ int ORI (char* i_);
 int ANDI (char* i_);
 
 // U Instruction
-int AUIPC (int Rd, int UpImm) {
-  int cur = 0;
-  UpImm = UpImm << 12;
-  cur = UpImm + CURRENT_STATE.PC;
-  NEXT_STATE.REGS[Rd] = cur;
-
-  printf("DEBUG: Rd=%d, UpImm=%d, new val=%d", Rd, UpImm, cur);
-  return 0;
-}
-
-int LUI (int Rd, int UpImm) {
-  UpImm = UpImm << 12;
-  NEXT_STATE.REGS[Rd] = UpImm;
-
-  printf("DEBUG: Rd=%d, UpImm=%d\n\n", Rd, UpImm);
-  return 0;
-}
+int AUIPC (char* i_);
+int LUI (char* i_);
 
 // S Instruction
 int SB (char* i_);
@@ -89,48 +75,22 @@ int SH (char* i_);
 int SW (char* i_);
 
 // R instruction
-int SUB (int Rd, int Rs1, int Rs2) {
+int SUB (int Rd, int Rs1, int Rs2, int Funct7) {
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] - CURRENT_STATE.REGS[Rs2];
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
+
 }
 
-int SLL (int Rd, int Rs1, int Rs2) {
-///???
-}
-
-// How to impl. unsigned vs signed??
-int SLT (int Rd, int Rs1, int Rs2) {
-  int cur = (CURRENT_STATE.REGS[Rs2] > CURRENT_STATE.REGS[Rs1]);
-  NEXT_STATE.REGS[Rd] = cur;
-  return 0;
-}
-
-int SLTU (int Rd, int Rs1, int Rs2) {}
-
-//Tested 
-int XOR (int Rd, int Rs1, int Rs2) {
-  int cur = (CURRENT_STATE.REGS[Rs2] ^ CURRENT_STATE.REGS[Rs1]);
-  NEXT_STATE.REGS[Rd] = cur;
-  return 0;
-}
-int SRL (int Rd, int Rs1, int Rs2) {}
-int SRA (int Rd, int Rs1, int Rs2) {}
-
-//Tested 
-int OR (int Rd, int Rs1, int Rs2) {
-  int cur = (CURRENT_STATE.REGS[Rs2] | CURRENT_STATE.REGS[Rs1]);
-  NEXT_STATE.REGS[Rd] = cur;
-  return 0;
-}
-
-//Tested 
-int AND (int Rd, int Rs1, int Rs2) {
-  int cur = (CURRENT_STATE.REGS[Rs2] & CURRENT_STATE.REGS[Rs1]);
-  NEXT_STATE.REGS[Rd] = cur;
-  return 0;
-}
+int SLL (char* i_);
+int SLT (char* i_);
+int SLTU (char* i_);
+int XOR (char* i_);
+int SRL (char* i_);
+int SRA (char* i_);
+int OR (char* i_);
+int AND (char* i_);
 
 // B instructions
 int BEQ (char* i_);

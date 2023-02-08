@@ -1,4 +1,3 @@
-#export ARCH = CYGNUS
 CC      = gcc
 CFLAGS  = -std=gnu99 -g -O2
 
