@@ -147,6 +147,8 @@ int r_process(char* i_) {
     
 
   }
+  
+
 
   /* Add other data instructions here */ 
 
@@ -189,12 +191,32 @@ int i_process(char* i_) {
   /* Add other imm instructions here */ 
 
   /* This is an Add Immediate Instruciton */
-  if(!strcmp(d_opcode,"0010011")) {
-    printf("--- This is an ADDI instruction. \n\n");
-    ADDI(Rd, Rs1, Imm, Funct3);
-    return 0;
-  }	  
 
+  if(!strcmp(d_opcode, "0010011")){ //I-Type opcode - 19
+    switch(Funct3){
+      case 0:
+        printf("--- This is an ADDI function");
+        ADDI(Rd, Rs1, Imm, Funct3);
+        return 0;
+      case 1: 
+        printf("--- This is a SLLI function");
+        /*SLLI(Rd, Rs1, zimm, Funct3); */
+        return 0;
+      case 2: 
+        printf("--- This is a SLTI function");
+        SLTI(Rd, Rs1, Imm, Funct3);
+        return 0;
+      case 3: 
+        printf("--- This is a STLIU function");
+        SLTIU(Rd, Rs1, Imm, Funct3);
+        return 0;
+      case 4:
+        printf("--- This is a XORI function");
+        XORI(Rd, Rs1, Imm, Funct3);
+        return 0;
+
+    }
+}
   return 1;	
 }
 
@@ -253,7 +275,7 @@ int b_process(char* i_) {
     BNE(Rs1, Rs2, Imm, Funct3);
     return 0;
   }	    
-
+  
   return 1;
 
 }

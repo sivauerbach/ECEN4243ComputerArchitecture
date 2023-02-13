@@ -55,14 +55,64 @@ int LH (char* i_);
 int LW (char* i_);
 int LBU (char* i_);
 int LHU (char* i_);
-int SLLI (char* i_);
-int SLTI (char* i_);
-int SLTIU (char* i_);
-int XORI (char* i_);
-int SRLI (char* i_);
-int SRAI (char* i_);
-int ORI (char* i_);
-int ANDI (char* i_);
+//zimm? 
+int SLLI (int Rd, int Rs1, int zimm, int Funct3){
+  int cur = 0;
+  cur = (CURRENT_STATE.REGS[Rs1] << zimm);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
+int SLTI (int Rd, int Rs1, int Imm, int Funct3){
+  int cur = 0;
+  cur = (CURRENT_STATE.REGS[Rs1] < SIGNEXT(Imm, 12));
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
+
+//how should this be different then SLTI
+int SLTIU (int Rd, int Rs1, int Imm, int Funct3){
+  int cur = 0;
+  cur = (CURRENT_STATE.REGS[Rs1] < SIGNEXT(Imm, 12));
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
+
+int XORI (int Rd, int Rs1, int Imm, int Funct3){
+  int cur = 0;
+  cur = (CURRENT_STATE.REGS[Rs1] ^ SIGNEXT(Imm,12));
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+};
+
+//zimm?
+int SRLI (int Rd, int Rs1, int zimm, int Funct3){
+  int cur = 0;
+  cur = (CURRENT_STATE.REGS[Rs1] >> zimm);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
+
+//zimm? also >>> vs >>? 
+int SRAI (int Rd, int Rs1, int zimm, int Funct3){
+  int cur = 0;
+  cur = (CURRENT_STATE.REGS[Rs1] >> zimm);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
+
+int ORI (int Rd, int Rs1, int Imm, int Funct3){
+  int cur = 0;
+  cur = (CURRENT_STATE.REGS[Rs1] | SIGNEXT(Imm, 12));
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
+
+int ANDI (char* i_){
+  int cur = 0;
+  cur = (CURRENT_STATE.REGS[Rs2] & SIGNEXT(Imm, 12));
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
 
 // U Instruction
 int AUIPC (int Rd, int UpImm) {
