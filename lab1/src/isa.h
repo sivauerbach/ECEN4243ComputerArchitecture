@@ -20,7 +20,9 @@
 //   if no, just give number
 //   if yes, sign extend (e.g., 0x80_0000 -> 0xFF80_0000)
 //
-#define SIGNEXT(v, sb) ((v) | (((v) & (1 << (sb))) ? ~((1 << (sb))-1) : 0))
+//#define SIGNEXT(v, sb) ((v) | (((v) & (1 << (sb))) ? ~((1 << (sb))-1) : 0))
+#define SIGNEXT(v, sb) ((v) | ( (0 < ((v) & (1 << (sb-1)))) ? ~((1 << (sb-1))-1) : 0))
+
 
 //Tested 
 int ADD (int Rd, int Rs1, int Rs2, int Funct3) {
@@ -65,16 +67,18 @@ int ORI (char* i_);
 int ANDI (char* i_);
 
 // U Instruction
+
+/* PASSED ALL TESTS */
 int AUIPC (int Rd, int UpImm) {
   int cur = 0;
   UpImm = UpImm << 12;
   cur = UpImm + CURRENT_STATE.PC;
   NEXT_STATE.REGS[Rd] = cur;
-
   printf("DEBUG: Rd=%d, UpImm=%d, new val=%d", Rd, UpImm, cur);
   return 0;
 }
 
+/* PASSED ALL TESTS */
 int LUI (int Rd, int UpImm) {
   UpImm = UpImm << 12;
   NEXT_STATE.REGS[Rd] = UpImm;
@@ -89,48 +93,55 @@ int SH (char* i_);
 int SW (char* i_);
 
 // R instruction
+
+/* PASSED ALL TESTS */
 int SUB (int Rd, int Rs1, int Rs2) {
   int cur = 0;
   cur = CURRENT_STATE.REGS[Rs1] - CURRENT_STATE.REGS[Rs2];
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
 }
-
-int SLL (int Rd, int Rs1, int Rs2) {
-///???
-}
-
-// How to impl. unsigned vs signed??
+/* PASSES ALL TESTS, compiler warning for overflow */
 int SLT (int Rd, int Rs1, int Rs2) {
+  int Rs1_value = SIGNEXT(CURRENT_STATE.REGS[Rs1], 32);
+  int Rs2_value = SIGNEXT(CURRENT_STATE.REGS[Rs2], 32);
+  int cur = (Rs1_value < Rs2_value);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
+/* PASSES ALL TESTS */
+int SLTU (int Rd, int Rs1, int Rs2) {  
   int cur = (CURRENT_STATE.REGS[Rs2] > CURRENT_STATE.REGS[Rs1]);
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
 }
 
-int SLTU (int Rd, int Rs1, int Rs2) {}
-
-//Tested 
+/* PASSES ALL TESTS */
 int XOR (int Rd, int Rs1, int Rs2) {
   int cur = (CURRENT_STATE.REGS[Rs2] ^ CURRENT_STATE.REGS[Rs1]);
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
 }
-int SRL (int Rd, int Rs1, int Rs2) {}
-int SRA (int Rd, int Rs1, int Rs2) {}
-
-//Tested 
+/* PASSES ALL TESTS */
 int OR (int Rd, int Rs1, int Rs2) {
   int cur = (CURRENT_STATE.REGS[Rs2] | CURRENT_STATE.REGS[Rs1]);
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
 }
-
-//Tested 
+/* PASSES ALL TESTS */
 int AND (int Rd, int Rs1, int Rs2) {
   int cur = (CURRENT_STATE.REGS[Rs2] & CURRENT_STATE.REGS[Rs1]);
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
 }
+
+int SRL (int Rd, int Rs1, int Rs2) {}
+int SRA (int Rd, int Rs1, int Rs2) {}
+int SLL (int Rd, int Rs1, int Rs2) {
+///???
+}
+
+
 
 // B instructions
 int BEQ (char* i_);
