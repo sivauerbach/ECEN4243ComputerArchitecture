@@ -128,9 +128,17 @@ int r_process(char* i_) {
               XOR(Rd, Rs1, Rs2);
               return 0;
       case 5:
-              printf("--- This is an SRL instruction. \n\n");
-              SRL(Rd, Rs1, Rs2);
-              return 0;
+              if (Funct7 == 0) {
+                printf("--- This is an SRL instruction. \n\n");
+                SRL(Rd, Rs1, Rs2);
+                return 0;
+              }
+              if (Funct7 == 32) {
+                printf("--- This is an SRA instruction. \n\n");
+                SRA(Rd, Rs1, Rs2);
+                return 0;
+              }
+              break;
       case 6:
               printf("--- This is an OR instruction. \n\n");
               OR(Rd, Rs1, Rs2);
@@ -249,8 +257,41 @@ int b_process(char* i_) {
 
   /* This is an Add Immediate Instruciton */
   if(!strcmp(d_opcode,"1100011")) {
+
+    switch(Funct3) {
+      case 0:
+              printf("--- This is an BEQ instruction. \n\n");
+              BEQ(Rs1, Rs2, Imm);
+              return 0;
+              break;
+      case 1:
+              printf("--- This is an BNE instruction. \n\n");
+              BNE(Rs1, Rs2, Imm);
+              return 0;
+      case 4:
+              printf("--- This is an BLT instruction. \n\n");
+              BLT(Rs1, Rs2, Imm);
+              return 0;
+      case 5:
+              printf("--- This is an BGE instruction. \n\n");
+              BGE(Rs1, Rs2, Imm);
+              return 0;
+      case 6:
+              printf("--- This is an BLTU instruction. \n\n");
+              BLTU(Rs1, Rs2, Imm);
+              return 0;
+      case 7:
+              printf("--- This is an BGEU instruction. \n\n");
+              BGEU(Rs1, Rs2, Imm);
+              return 0;
+      default:
+              printf("--- ERROR: Invalid Funct3 Value. \n");
+              return -1;
+  
+    }
+
     printf("--- This is an BNE instruction. \n\n");
-    BNE(Rs1, Rs2, Imm, Funct3);
+    BNE(Rs1, Rs2, Imm);
     return 0;
   }	    
 
