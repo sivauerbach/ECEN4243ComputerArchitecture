@@ -31,20 +31,54 @@ int ADDI (int Rd, int Rs1, int Imm) {
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
 }
-int LB (int Rs1, int Rs2, int Imm){}
-int LH (int Rs1, int Rs2, int Imm){}
-int LW (int Rs1, int Rs2, int Imm){}
-int LBU (int Rs1, int Rs2, int Imm){}
-int LHU (int Rs1, int Rs2, int Imm){}
-int SLLI (int Rs1, int Rs2, int Imm){}
-int SLTI (int Rs1, int Rs2, int Imm){}
-int SLTIU (int Rs1, int Rs2, int Imm){}
-int XORI (int Rs1, int Rs2, int Imm){}
-int SRLI (int Rs1, int Rs2, int Imm){}
-int SRAI (int Rs1, int Rs2, int Imm){}
-int ORI (int Rs1, int Rs2, int Imm){}
-int ANDI (int Rs1, int Rs2, int Imm){}
-int JALR (int Rs1, int Rs2, int Imm){}
+int LB (int Rd, int Rs1, int Imm){}
+int LH (int Rd, int Rs1, int Imm){}
+int LW (int Rd, int Rs1, int Imm){}
+int LBU (int Rd, int Rs1, int Imm){}
+int LHU (int Rd, int Rs1, int Imm){}
+
+int SLLI (int Rd, int Rs1, int Imm){}
+
+/* PASSED ALL TESTS */
+int SLTI (int Rd, int Rs1, int Imm){
+  int Rs1_value = CURRENT_STATE.REGS[Rs1];
+  int Imm_signed = SIGNEXT(Imm, 12);
+  int cur = (Rs1_value < Imm_signed);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
+/* PASSED ALL TESTS */
+int SLTIU (int Rd, int Rs1, int Imm){
+  uint32_t unsigned_imm = (uint32_t)SIGNEXT(Imm, 12);
+  uint32_t Rs1_val = CURRENT_STATE.REGS[Rs1];
+  int cur = ( Rs1_val< unsigned_imm);
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
+/* PASSED ALL TESTS */
+int XORI (int Rd, int Rs1, int Imm){
+  int cur = (CURRENT_STATE.REGS[Rs1] ^ SIGNEXT(Imm, 12));
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
+int SRLI (int Rd, int Rs1, int Imm){}
+int SRAI (int Rd, int Rs1, int Imm){
+
+}
+
+/* PASSED ALL TESTS */
+int ORI (int Rd, int Rs1, int Imm){
+  int cur = (CURRENT_STATE.REGS[Rs1] | SIGNEXT(Imm, 12));
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
+/* PASSED ALL TESTS */
+int ANDI (int Rd, int Rs1, int Imm){
+  int cur = (CURRENT_STATE.REGS[Rs1] & SIGNEXT(Imm, 12));
+  NEXT_STATE.REGS[Rd] = cur;
+  return 0;
+}
+int JALR (int Rd, int Rs1, int Imm){}
 
 // S Instruction
 
