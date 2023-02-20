@@ -6,7 +6,7 @@
 /*   Oklahoma State University                                 */
 /*                                                             */
 /***************************************************************/
-
+//check
 #ifndef _SIM_ISA_H_
 #define _SIM_ISA_H_
 
@@ -34,10 +34,11 @@ int ADDI (int Rd, int Rs1, int Imm) {
 int LB (int Rd, int Rs1, int Imm){}
 int LH (int Rd, int Rs1, int Imm){}
 int LW (int Rd, int Rs1, int Imm){
-  int32_t address = Rs1 + 4;
+  int32_t address = Rs1 + 4;//*4 not sure what to do to get correct mem address.
   int32_t value = mem_read_32(address);
   NEXT_STATE.REGS[Rd] = value;
   printf("DEBUG: Rd=%d, UpImm=%d, new val=%d, address=%d", Rd, Imm, value, address);
+  return 0;
 }
 int LBU (int Rd, int Rs1, int Imm){}
 int LHU (int Rd, int Rs1, int Imm){}
