@@ -141,13 +141,13 @@ int JALR (int Rd, int Rs1, int Imm){
 // S Instruction
 
 int SB (int Rs1, int Rs2, int Imm){
-  int8_t value = CURRENT_STATE.REGS[Rs2]; //<< 16) >>16);
+  int32_t value = CURRENT_STATE.REGS[Rs2]; //<< 16) >>16);
   int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
   mem_write_32(address, value);
   printf("DEBUG: Rs1=%d, Rs2= %d, Imm=%d, new val=%d", Rs1, Rs2, Imm, value);
 }
 int SH (int Rs1, int Rs2, int Imm){
-  uint16_t value = CURRENT_STATE.REGS[Rs2]; //<< 16) >>16);
+  int32_t value = CURRENT_STATE.REGS[Rs2]; //<< 16) >>16);
   int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
   mem_write_32(address, value);
   printf("DEBUG: Rs1=%d, Rs2= %d, Imm=%d, new val=%d", Rs1, Rs2, Imm, value);
