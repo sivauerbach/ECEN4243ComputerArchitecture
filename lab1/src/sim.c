@@ -275,7 +275,12 @@ int i_process(char* i_) {
               printf("--- ERROR: Invalid Funct3 Value. \n");
               return -1;
     }
-  }	  
+  }	 
+  if(!strcmp(d_opcode,"1100111")) {
+    printf("--- This is an JALR instruction. \n\n");
+    JALR(Rd, Rs1, Imm);
+  }
+
   return 1;	
 }
 
@@ -497,6 +502,8 @@ int j_process(char* i_) {
     printf("--- This is an JAL instruction. \n\n");
     JAL(Rd, Imm);
   }
+
+  //all jalr
   return 1;
 }
 
@@ -583,6 +590,13 @@ int decode_and_execute(char* i_) {
   if((i_[25] == '0') && (i_[26] == '0') &&
      (i_[27] == '1') && (i_[28] == '0') &&
      (i_[29] == '0') && (i_[30] == '1') && (i_[31] == '1')) {
+    printf("- This is an Immediate Type Instruction. \n");
+    i_process(i_);
+  }
+
+  if((i_[25] == '1') && (i_[26] == '1') &&
+     (i_[27] == '0') && (i_[28] == '0') &&
+     (i_[29] == '1') && (i_[30] == '1') && (i_[31] == '1')) {
     printf("- This is an Immediate Type Instruction. \n");
     i_process(i_);
   }

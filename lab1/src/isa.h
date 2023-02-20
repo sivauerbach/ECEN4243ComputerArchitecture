@@ -37,7 +37,14 @@ int LW (int Rd, int Rs1, int Imm){}
 int LBU (int Rd, int Rs1, int Imm){}
 int LHU (int Rd, int Rs1, int Imm){}
 
-int SLLI (int Rd, int Rs1, int Imm){}
+/* PASSED ALL TESTS */
+int SLLI (int Rd, int Rs1, int Imm){
+  uint32_t bottom_imm = ((Imm << 7) >> 7);
+  int cur = CURRENT_STATE.REGS[Rs1] << bottom_imm; 
+  NEXT_STATE.REGS[Rd] =   cur;
+  printf("imm= %x, bottom imm= %x\n", Imm, bottom_imm);
+  return 0;
+}
 
 /* PASSED ALL TESTS */
 int SLTI (int Rd, int Rs1, int Imm){
@@ -61,9 +68,23 @@ int XORI (int Rd, int Rs1, int Imm){
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
 }
-int SRLI (int Rd, int Rs1, int Imm){}
-int SRAI (int Rd, int Rs1, int Imm){
 
+/* PASSED ALL TESTS */
+int SRLI (int Rd, int Rs1, int Imm){
+  //  CURRENT_STATE.REGS hold unsigned int_32, >> performs logic shift 
+  uint32_t bottom_imm = ((Imm << 7) >> 7);
+  int cur = CURRENT_STATE.REGS[Rs1] >> bottom_imm; 
+  NEXT_STATE.REGS[Rd] =   cur;
+  return 0;
+}
+
+/* PASSED ALL TESTS */
+int SRAI (int Rd, int Rs1, int Imm){
+  int rs1 = CURRENT_STATE.REGS[Rs1];
+  uint32_t bottom_imm = ((Imm << 7) >> 7);
+  // performs signed (arithmetic) shift on int types
+  NEXT_STATE.REGS[Rd] = rs1 >> bottom_imm;
+  return 0;
 }
 
 /* PASSED ALL TESTS */
@@ -78,7 +99,11 @@ int ANDI (int Rd, int Rs1, int Imm){
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
 }
-int JALR (int Rd, int Rs1, int Imm){}
+int JALR (int Rd, int Rs1, int Imm){
+  Imm = Imm << 1;
+  NEXT_STATE.PC = (CURRENT_STATE.REGS[Rs1] -4) + (SIGNEXT(Imm,12));
+  NEXT_STATE.REGS[Rd] = CURRENT_STATE.PC + 4;
+}
 
 // S Instruction
 
@@ -186,7 +211,8 @@ int SRA (int Rd, int Rs1, int Rs2) {
 int SLL (int Rd, int Rs1, int Rs2) {
   int cur = CURRENT_STATE.REGS[Rs1] << CURRENT_STATE.REGS[Rs2]; 
   NEXT_STATE.REGS[Rd] =   cur;
-  return 0;}
+  return 0;
+}
 
 
 // B instructions - COMPLETED
