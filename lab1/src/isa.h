@@ -31,9 +31,19 @@ int ADDI (int Rd, int Rs1, int Imm) {
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
 }
-int LB (int Rd, int Rs1, int Imm){}
+int LB (int Rd, int Rs1, int Imm){
+  
+}
 int LH (int Rd, int Rs1, int Imm){}
-int LW (int Rd, int Rs1, int Imm){}
+int LW (int Rd, int Rs1, int Imm){
+  int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);//*4 not sure what to do to get correct mem address.
+  int32_t value = mem_read_32(address);
+  NEXT_STATE.REGS[Rd] = value;
+  printf("DEBUG: Rd=%u, UpImm=%u, new val=%u, address=%u\n", Rd, Imm, value, address);
+  return 0;
+}
+
+
 int LBU (int Rd, int Rs1, int Imm){}
 int LHU (int Rd, int Rs1, int Imm){}
 

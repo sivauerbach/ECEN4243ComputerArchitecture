@@ -563,7 +563,7 @@ int u_process(char* i_) {
   }	
 
   if(!strcmp(u_opcode,"0110111")) {
-    printf("--- This is an AUI instruction. \n\n");
+    printf("--- This is an LUI instruction. \n\n");
     LUI(Rd, Imm);
     return 0;
   }	
@@ -589,6 +589,12 @@ int decode_and_execute(char* i_) {
 
   if((i_[25] == '0') && (i_[26] == '0') &&
      (i_[27] == '1') && (i_[28] == '0') &&
+     (i_[29] == '0') && (i_[30] == '1') && (i_[31] == '1')) {
+    printf("- This is an Immediate Type Instruction. \n");
+    i_process(i_);
+  }
+  if((i_[25] == '0') && (i_[26] == '0') &&
+     (i_[27] == '0') && (i_[28] == '0') &&
      (i_[29] == '0') && (i_[30] == '1') && (i_[31] == '1')) {
     printf("- This is an Immediate Type Instruction. \n");
     i_process(i_);
