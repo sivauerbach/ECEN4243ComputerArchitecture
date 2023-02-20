@@ -31,12 +31,23 @@ int ADDI (int Rd, int Rs1, int Imm) {
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
 }
-int LB (int Rd, int Rs1, int Imm){
-  
+int LB (int Rd, int Rs1, int Imm){ //mask 
+  int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+  int32_t value = mem_read_32(address);
+  int8_t cur = value;
+  NEXT_STATE.REGS[Rd] = cur;
+  printf("DEBUG: Rd=%u, UpImm=%u, new val=%u, address=%u\n", Rd, Imm, value, address); 
 }
-int LH (int Rd, int Rs1, int Imm){}
+int LH (int Rd, int Rs1, int Imm){
+  int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+  int32_t value = mem_read_32(address);
+  int16_t cur = value;
+  NEXT_STATE.REGS[Rd] = cur;
+  printf("DEBUG: Rd=%u, UpImm=%u, new val=%u, address=%u\n", Rd, Imm, value, address); 
+}
+/*PASSED ALL TESTS*/
 int LW (int Rd, int Rs1, int Imm){
-  int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);//*4 not sure what to do to get correct mem address.
+  int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
   int32_t value = mem_read_32(address);
   NEXT_STATE.REGS[Rd] = value;
   printf("DEBUG: Rd=%u, UpImm=%u, new val=%u, address=%u\n", Rd, Imm, value, address);
@@ -44,8 +55,20 @@ int LW (int Rd, int Rs1, int Imm){
 }
 
 
-int LBU (int Rd, int Rs1, int Imm){}
-int LHU (int Rd, int Rs1, int Imm){}
+int LBU (int Rd, int Rs1, int Imm){
+  int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+  uint32_t value = mem_read_32(address);
+  uint8_t cur = value;
+  NEXT_STATE.REGS[Rd] = cur;
+  printf("DEBUG: Rd=%u, UpImm=%u, new val=%u, address=%u\n", Rd, Imm, value, address); 
+}
+int LHU (int Rd, int Rs1, int Imm){
+  int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+  uint32_t value = mem_read_32(address);
+  uint16_t cur = value;
+  NEXT_STATE.REGS[Rd] = cur;
+  printf("DEBUG: Rd=%u, UpImm=%u, new val=%u, address=%u\n", Rd, Imm, value, address); 
+}
 
 /* PASSED ALL TESTS */
 int SLLI (int Rd, int Rs1, int Imm){
@@ -117,12 +140,22 @@ int JALR (int Rd, int Rs1, int Imm){
 
 // S Instruction
 
-int SB (int Rs1, int Rs2, int Imm){}
-int SH (int Rs1, int Rs2, int Imm){}
+int SB (int Rs1, int Rs2, int Imm){
+  int8_t value = CURRENT_STATE.REGS[Rs2]; //<< 16) >>16);
+  int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+  mem_write_32(address, value);
+  printf("DEBUG: Rs1=%d, Rs2= %d, Imm=%d, new val=%d", Rs1, Rs2, Imm, value);
+}
+int SH (int Rs1, int Rs2, int Imm){
+  uint16_t value = CURRENT_STATE.REGS[Rs2]; //<< 16) >>16);
+  int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
+  mem_write_32(address, value);
+  printf("DEBUG: Rs1=%d, Rs2= %d, Imm=%d, new val=%d", Rs1, Rs2, Imm, value);
+}
 // signed/unsigned?
 int SW (int Rs1, int Rs2, int Imm){
-  uint32_t value = ( (CURRENT_STATE.REGS[Rs2] << 16) >>16);
-  uint32_t address = Rs1 + Imm*4;
+  int32_t value = CURRENT_STATE.REGS[Rs2]; //<< 16) >>16);
+  int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
   mem_write_32(address, value);
   printf("DEBUG: Rs1=%d, Rs2= %d, Imm=%d, new val=%d", Rs1, Rs2, Imm, value);
   return 0;
