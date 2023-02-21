@@ -31,6 +31,7 @@ int ADDI (int Rd, int Rs1, int Imm) {
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
 }
+/* PASSED ALL TESTS */
 int LB (int Rd, int Rs1, int Imm){ //mask 
   int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
   int32_t value = mem_read_32(address);
@@ -38,6 +39,7 @@ int LB (int Rd, int Rs1, int Imm){ //mask
   NEXT_STATE.REGS[Rd] = cur;
   printf("DEBUG: Rd=%u, UpImm=%u, new val=%u, address=%u\n", Rd, Imm, value, address); 
 }
+/* PASSED ALL TESTS */
 int LH (int Rd, int Rs1, int Imm){
   int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
   int32_t value = mem_read_32(address);
@@ -55,6 +57,7 @@ int LW (int Rd, int Rs1, int Imm){
 }
 
 
+/* PASSED ALL TESTS */
 int LBU (int Rd, int Rs1, int Imm){
   int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
   uint32_t value = mem_read_32(address);
@@ -62,6 +65,7 @@ int LBU (int Rd, int Rs1, int Imm){
   NEXT_STATE.REGS[Rd] = cur;
   printf("DEBUG: Rd=%u, UpImm=%u, new val=%u, address=%u\n", Rd, Imm, value, address); 
 }
+/* PASSED ALL TESTS */
 int LHU (int Rd, int Rs1, int Imm){
   int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
   uint32_t value = mem_read_32(address);
@@ -132,6 +136,7 @@ int ANDI (int Rd, int Rs1, int Imm){
   NEXT_STATE.REGS[Rd] = cur;
   return 0;
 }
+/* PASSED ALL TESTS */
 int JALR (int Rd, int Rs1, int Imm){
   Imm = Imm << 1;
   NEXT_STATE.PC = (CURRENT_STATE.REGS[Rs1] -4) + (SIGNEXT(Imm,12));
@@ -139,20 +144,22 @@ int JALR (int Rd, int Rs1, int Imm){
 }
 
 // S Instruction
-
+/* PASSED ALL TESTS */
 int SB (int Rs1, int Rs2, int Imm){
   int32_t value = CURRENT_STATE.REGS[Rs2]; //<< 16) >>16);
   int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
   mem_write_32(address, value);
   printf("DEBUG: Rs1=%d, Rs2= %d, Imm=%d, new val=%d", Rs1, Rs2, Imm, value);
 }
+/* PASSED ALL TESTS */
 int SH (int Rs1, int Rs2, int Imm){
   int32_t value = CURRENT_STATE.REGS[Rs2];
   int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
   mem_write_32(address, value);
   printf("DEBUG: Rs1=%d, Rs2= %d, Imm=%d, new val=%d", Rs1, Rs2, Imm, value);
 }
-// signed/unsigned?
+
+/* PASSED ALL TESTS */
 int SW (int Rs1, int Rs2, int Imm){
   int32_t value = CURRENT_STATE.REGS[Rs2];
   int32_t address = CURRENT_STATE.REGS[Rs1] + SIGNEXT(Imm, 12);
@@ -173,7 +180,7 @@ int AUIPC (int Rd, int UpImm) {
   return 0;
 }
 
-/* NOT PASSED ALL TESTS, need to impl SRAI first*/
+/* PASSED ALL TESTS */
 int LUI (int Rd, int UpImm) {
   UpImm = UpImm << 12;
   NEXT_STATE.REGS[Rd] = UpImm;
@@ -319,7 +326,7 @@ int BGEU (int Rs1, int Rs2, int Imm){
 /* PASSES ALL TESTS */
 int JAL (int Rd, int Imm){
   Imm = Imm << 1;
-  NEXT_STATE.PC = (CURRENT_STATE.PC -4) + (SIGNEXT(Imm,21));
+  NEXT_STATE.PC = (CURRENT_STATE.PC - 4) + (SIGNEXT(Imm,21));
   NEXT_STATE.REGS[Rd] = CURRENT_STATE.PC + 4;
 }
 
