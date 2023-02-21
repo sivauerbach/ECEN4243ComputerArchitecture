@@ -392,8 +392,7 @@ int main(int argc, char *argv[]) {
 
   /* Error Checking */
   if (argc < 2) {
-    printf("Error: usage: %s <program_file_1> <program_file_2> ...\n",
-           argv[0]);
+    printf("Error: usage: %s <program_file_1> <program_file_2> ...\n", argv[0]);
     exit(1);
   }
 
