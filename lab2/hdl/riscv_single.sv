@@ -40,7 +40,7 @@ module testbench();
    initial
      begin
 	string memfilename;
-        memfilename = {"../riscvtest/riscvtest.memfile"};
+        memfilename = {"../riscvtest/mytest.memfile"};
         $readmemh(memfilename, dut.imem.RAM);
      end
 
@@ -143,6 +143,7 @@ module maindec (input  logic [6:0] op,
    
 endmodule // maindec
 
+// Computes ALUControl
 module aludec (input  logic       opb5,
 	       input  logic [2:0] funct3,
 	       input  logic 	  funct7b5,
@@ -157,14 +158,15 @@ module aludec (input  logic       opb5,
        2'b00: ALUControl = 3'b000; // addition
        2'b01: ALUControl = 3'b001; // subtraction
        default: case(funct3) // R–type or I–type ALU
-		  3'b000: if (RtypeSub)
-		    ALUControl = 3'b001; // sub
-		  else
-		    ALUControl = 3'b000; // add, addi
-		  3'b010: ALUControl = 3'b101; // slt, slti
-		  3'b110: ALUControl = 3'b011; // or, ori
-		  3'b111: ALUControl = 3'b010; // and, andi
-		  default: ALUControl = 3'bxxx; // ???
+                3'b000: if (RtypeSub)
+                          ALUControl = 3'b001; // sub
+                        else
+                          ALUControl = 3'b000; // add, addi
+                3'b010: ALUControl = 3'b101; // slt, slti
+                3'b110: ALUControl = 3'b011; // or, ori
+                3'b111: ALUControl = 3'b010; // and, andi
+                3'b100: ALUControl = 3'b100; // xor, xori
+                default: ALUControl = 3'bxxx; // ???
 		endcase // case (funct3)       
      endcase // case (ALUOp)
    
@@ -188,10 +190,10 @@ module datapath (input  logic        clk, reset,
    logic [31:0] 		     Result;
    
    // next PC logic
-   flopr #(32) pcreg (clk, reset, PCNext, PC);
+   flopr #(32) pcreg (clk, reset, PCNext, PC); //Q: what does #(32) mean?
    adder  pcadd4 (PC, 32'd4, PCPlus4);
    adder  pcaddbranch (PC, ImmExt, PCTarget);
-   mux2 #(32)  pcmux (PCPlus4, PCTarget, PCSrc, PCNext);
+   mux2 #(32)  pcmux (PCPlus4, PCTarget, PCSrc, PCNext); 
    // register file logic
    regfile  rf (clk, RegWrite, Instr[19:15], Instr[24:20],
 	       Instr[11:7], Result, SrcA, WriteData);
@@ -324,6 +326,7 @@ module alu (input  logic [31:0] a, b,
        3'b001:  result = sum;         // subtract
        3'b010:  result = a & b;       // and
        3'b011:  result = a | b;       // or
+       3'b100:  result = a ^ b;       // xor
        3'b101:  result = sum[31] ^ v; // slt       
        default: result = 32'bx;
      endcase
