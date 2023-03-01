@@ -1,4 +1,4 @@
-# //  ModelSim SE-64 2021.2 Apr 14 2021
+# //  ModelSim SE-64 2021.3 Jul 13 2021
 # //
 # //  Copyright 1991-2021 Mentor Graphics Corporation
 # //  All Rights Reserved.
@@ -11,9 +11,12 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# do ./riscv_single.do
-# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
-# Start time: 00:01:14 on Feb 28,2023
+# do {.\riscv_single.do}
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
+# Start time: 11:22:54 on Mar 01,2023
 # vlog -reportprogress 300 riscv_single.sv 
 # -- Compiling module testbench
 # -- Compiling module riscvsingle
@@ -36,13 +39,13 @@
 # Top level modules:
 # 	testbench
 # 	flopenr
-# End time: 00:01:14 on Feb 28,2023, Elapsed time: 0:00:00
+# End time: 11:22:54 on Mar 01,2023, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 00:01:15 on Feb 28,2023
+# Start time: 11:22:55 on Mar 01,2023
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Note: (vsim-8611) Generating debug db.
-# ** Note: (vopt-4301) Memory core inferred for signal 'RAM' width=32, depth=64, type=RAM at location riscv_single.sv:301
+# ** Note: (vopt-4301) Memory core inferred for signal 'RAM' width=32, depth=64, type=RAM at location riscv_single.sv:303
 # Loading sv_std.std
 # Loading work.testbench(fast)
 # Loading work.top(fast)
@@ -62,10 +65,14 @@
 # Loading work.dmem(fast)
 # ** Note: (vsim-8900) Creating design debug database vsim.dbg.
 # ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 22320
+#           Attempting to use alternate WLF file "./wlftgf7mkd".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftgf7mkd
 # Simulation failed
 # ** Note: $stop    : riscv_single.sv(69)
-#    Time: 205 ns  Iteration: 1  Instance: /testbench
+#    Time: 185 ns  Iteration: 1  Instance: /testbench
 # Break in Module testbench at riscv_single.sv line 69
 # Debug data file does not match loaded design.
 # Debug data file does not match loaded design.
-find drivers -source -time {41 ns} -cause sim:/testbench/dut/rv32single/Instr
