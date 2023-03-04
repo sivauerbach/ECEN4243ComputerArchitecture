@@ -17,13 +17,13 @@ R0
 cModel Technology
 Z1 dC:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/hdl
 T_opt
-!s110 1677542475
-VD8zbR8SMnEF?PGNeNAWhT3
-Z2 04 9 4 work testbench fast 0
-=1-a44cc866e7df-63fd444b-1db-5730
-Z3 !s124 OEM100
-Z4 o-quiet -auto_acc_if_foreign -work work -debugdb +acc
-Z5 tCvgOpt 0
+!s110 1677544727
+VjQJ@[`iPFWilXlOfY2WRz1
+04 9 4 work testbench fast 0
+=1-a44cc866e7df-63fd4d17-14b-5338
+!s124 OEM100
+o-quiet -auto_acc_if_foreign -work work -debugdb +acc
+Z1 tCvgOpt 0
 n@_opt
 OL;O;2021.2;73
 R1
@@ -38,31 +38,42 @@ R5
 n@_opt1
 OL;O;2021.3;73
 vadder
-Z6 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z7 !s110 1677691374
+Z2 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z3 !s110 1677544726
 !i10b 1
-!s100 il^iUz2=UM0RIS`ikT<jM1
-IP6:JSB16Iin?cWRZS4PIc3
+!s100 2WFfc`^>@ZAO>nK_9fk@h1
+IN;e6ifKiXY^K`e5TBLhhU1
 S1
-Z8 dC:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/hdl
-Z9 w1677691235
-Z10 8riscv_single.sv
-Z11 Friscv_single.sv
+R0
+Z4 w1677522264
+Z5 8riscv_single.sv
+Z6 Friscv_single.sv
 !i122 0
-L0 210 6
-Z12 VDg1SIo80bB@j0V0VzS_@n1
-Z13 OL;L;2021.3;73
+L0 213 6
+Z7 VDg1SIo80bB@j0V0VzS_@n1
+Z8 OL;L;2021.2;73
 r1
 !s85 0
 31
-Z14 !s108 1677691374.000000
-Z15 !s107 riscv_single.sv|
-Z16 !s90 -reportprogress|300|riscv_single.sv|
+Z9 !s108 1677544726.000000
+Z10 !s107 riscv_single.sv|
+Z11 !s90 -reportprogress|300|riscv_single.sv|
 !i113 0
 Z17 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R5
 valu
+R2
+R3
+!i10b 1
+!s100 7LXfRTX^hblYzz^h_VN0h2
+I3_a4?4ToIG^cLzAdIgML`3
+S1
+R0
+R4
+R5
 R6
+!i122 0
+L0 314 29
 R7
 !i10b 1
 !s100 9dG7RjDzeiLYnK0e=@?`01
@@ -86,7 +97,18 @@ R16
 R17
 R5
 valudec
+R2
+R3
+!i10b 1
+!s100 9RH3OhJ<QI>:1D4m_RQE>1
+IHHI>]GCkUhXfK?PL<1><M3
+S1
+R0
+R4
+R5
 R6
+!i122 0
+L0 152 27
 R7
 !i10b 1
 !s100 ?]jYW37e<g>IX12azTakH3
@@ -134,7 +156,18 @@ R16
 R17
 R5
 vdatapath
+R2
+R3
+!i10b 1
+!s100 1HOF08?WHB_g^2GJnLhR92
+IM9G[OgM6Dli8DAmc6a`>d2
+S1
+R0
+R4
+R5
 R6
+!i122 0
+L0 180 32
 R7
 !i10b 1
 !s100 RJbZX:Ek@_]C`o2D><]EY2
@@ -158,7 +191,18 @@ R16
 R17
 R5
 vdmem
+R2
+R3
+!i10b 1
+!s100 SNA__ChnnCdfG3WS1[Q:R1
+IJf2=JP^nIkNLTUG6c_e5?2
+S1
+R0
+R4
+R5
 R6
+!i122 0
+L0 302 11
 R7
 !i10b 1
 !s100 D^U2OlIhOJ_CMAJIncP_i2
@@ -182,7 +226,18 @@ R16
 R17
 R5
 vextend
+R2
+R3
+!i10b 1
+!s100 ]V>1=3J9AgA9N7Kg=kOd>2
+INJ]ZFEdadHmao_kA5j;>l3
+S1
+R0
+R4
+R5
 R6
+!i122 0
+L0 220 18
 R7
 !i10b 1
 !s100 >X>KNc]ibKhM<FQj3[=oc1
@@ -206,7 +261,18 @@ R16
 R17
 R5
 vflopenr
+R2
+R3
+!i10b 1
+!s100 [W7gRYF9jAH[DfTSfIMBD0
+I?UznX9?27OJnQL<<9gV]M0
+S1
+R0
+R4
+R5
 R6
+!i122 0
+L0 250 10
 R7
 !i10b 1
 !s100 iK@YHR_6HGi`b5dj_2o2;2
@@ -230,7 +296,18 @@ R16
 R17
 R5
 vflopr
+R2
+R3
+!i10b 1
+!s100 BVX_Y<R=X4jPE=3i3SZmS2
+Ih4:?k<3OQDd6UHl3UJHlC0
+S1
+R0
+R4
+R5
 R6
+!i122 0
+L0 239 10
 R7
 !i10b 1
 !s100 O]fHcaV3?9zCJ=H6NLL9g2
@@ -254,7 +331,18 @@ R16
 R17
 R5
 vimem
+R2
+R3
+!i10b 1
+!s100 4I7SH1WzVNKCF7BDW98o12
+I00P7^eMIgY7aMZcP5nUaT1
+S1
+R0
+R4
+R5
 R6
+!i122 0
+L0 293 8
 R7
 !i10b 1
 !s100 6ajZ1_5ooj06fMI6^GJ9b2
@@ -281,17 +369,17 @@ vmaindec
 R6
 R7
 !i10b 1
-!s100 V^]U[kzaPF4WIi`fXGgS33
-IVnB^@[m8SeEj>=cGX<=Cl3
+!s100 USzaUfaHfPOodWd5mL5O@1
+IlH4QHz2AS8ACRQ^d2mgT73
 S1
 R8
 R9
 R10
 R11
 !i122 0
-L0 119 26
-R12
-R13
+L0 119 31
+R7
+R8
 r1
 !s85 0
 31
@@ -302,7 +390,18 @@ R16
 R17
 R5
 vmux2
+R2
+R3
+!i10b 1
+!s100 ?MflXFf;D]oYT3J9J7P;k1
+I8m?iD8h8kAUd[2Pl>j4E^3
+S1
+R0
+R4
+R5
 R6
+!i122 0
+L0 261 8
 R7
 !i10b 1
 !s100 ?ULQNG35RMTXa@0kbPkGU2
@@ -326,7 +425,18 @@ R16
 R17
 R5
 vmux3
+R2
+R3
+!i10b 1
+!s100 dfP2H_:UCLOYS9P1ngN9k2
+IZ_K<ePo::d?1QaY>nFg900
+S1
+R0
+R4
+R5
 R6
+!i122 0
+L0 270 8
 R7
 !i10b 1
 !s100 izUjPYnIN5IQde]@mUR]42
@@ -350,7 +460,18 @@ R16
 R17
 R5
 vregfile
+R2
+R3
+!i10b 1
+!s100 I54UKH1^_Ng?EWzUJeVn33
+I@>WnEZeRVAl4@Y_`]Z<4b2
+S1
+R0
+R4
+R5
 R6
+!i122 0
+L0 344 20
 R7
 !i10b 1
 !s100 _38loBb9_IkGHz>H[d0Z^3
@@ -419,10 +540,22 @@ R14
 R15
 R16
 !i113 0
-R17
+R12
+R1
+vtop
+R2
+R3
+!i10b 1
+!s100 mmgRA[5m70PP=<EQzTPJ_1
+I8eRCo[TXX=H4OOBecKKD=1
+S1
+R0
+R4
 R5
 vtop
 R6
+!i122 0
+L0 279 13
 R7
 !i10b 1
 !s100 QQ@`GQWf<ZSaUX?C@RzcG0

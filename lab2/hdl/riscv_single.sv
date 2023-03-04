@@ -112,7 +112,12 @@ module controller (input  logic [6:0] op,
    maindec md (op, ResultSrc, MemWrite, Branch,
 	       ALUSrc, RegWrite, Jump, ImmSrc, ALUOp);
    aludec ad (op[5], funct3, funct7b5, ALUOp, ALUControl);
-   assign PCSrc = Branch & Zero | Jump;
+   
+   //assigns PCSrc=1 if: 
+   //J-type
+   //B type: (SrcA=SrcB, )
+   assign gt = 
+   assign PCSrc = (Branch & (Zero ^ funct3[0])) | Jump; , 
    
 endmodule // controller
 
@@ -132,13 +137,20 @@ module maindec (input  logic [6:0] op,
    always_comb
      case(op)
        // RegWrite_ImmSrc_ALUSrc_MemWrite_ResultSrc_Branch_ALUOp_Jump
-       7'b0000011: controls = 11'b1_00_1_0_01_0_00_0; // lw
+       7'b0000011: controls = 11'b1_00_1_0_01_0_00_0; // lw, lh, lb
        7'b0100011: controls = 11'b0_01_1_1_00_0_00_0; // sw
        7'b0110011: controls = 11'b1_xx_0_0_00_0_10_0; // R–type
        7'b1100011: controls = 11'b0_10_0_0_00_1_01_0; // beq
        7'b0010011: controls = 11'b1_00_1_0_00_0_10_0; // I–type ALU
        7'b1101111: controls = 11'b1_11_0_0_10_0_00_1; // jal
+       //7'b1100111: controls = 11'b1_11_0_0_10_0_00_1; // jalr
+       
        default: controls = 11'bx_xx_x_x_xx_x_xx_x; // ???
+
+       // Define ALUSrc: 0=R type    1=I type (Source for SrcB)
+       //
+       //
+
      endcase // case (op)
    
 endmodule // maindec
@@ -192,7 +204,7 @@ module datapath (input  logic        clk, reset,
    logic [31:0] 		     Result;
    
    // next PC logic
-   flopr #(32) pcreg (clk, reset, PCNext, PC); //Q: what does #(32) mean?
+   flopr #(32) pcreg (clk, reset, PCNext, PC); // parameter WIDTH=32
    adder  pcadd4 (PC, 32'd4, PCPlus4);
    adder  pcaddbranch (PC, ImmExt, PCTarget);
    mux2 #(32)  pcmux (PCPlus4, PCTarget, PCSrc, PCNext); 
