@@ -76,3 +76,5 @@
 # Break in Module testbench at riscv_single.sv line 69
 # Debug data file does not match loaded design.
 # Debug data file does not match loaded design.
+# End time: 10:57:31 on Mar 02,2023, Elapsed time: 23:34:36
+# Errors: 1, Warnings: 2
