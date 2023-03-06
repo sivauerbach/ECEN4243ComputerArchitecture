@@ -40,7 +40,7 @@ module testbench();
   initial
     begin
       string memfilename;
-      memfilename = {"../riscvtest/sllsrltest.memfile"};
+      memfilename = {"../riscvtest/riscvtest.memfile"};
       $readmemh(memfilename, dut.imem.RAM);
     end
 
@@ -78,18 +78,18 @@ module riscvsingle (input  logic        clk, reset,
       output logic [31:0] ALUResult, WriteData,
       input  logic [31:0] ReadData);
   
-  logic 				ALUSrc, RegWrite, Jump, Zero;
+  logic 				ALUSrc, RegWrite, JumpType, Zero, BranchYN;
   logic [1:0] 				ResultSrc, ImmSrc;
   logic [2:0] 				ALUControl;
   
-  controller c (Instr[6:0], Instr[14:12], Instr[30], Zero,
+  controller c (Instr[6:0], Instr[14:12], Instr[30], Zero, BranchYN,
     ResultSrc, MemWrite, PCSrc,
-    ALUSrc, RegWrite, Jump,
+    ALUSrc, RegWrite, JumpType,
     ImmSrc, ALUControl);
   datapath dp (clk, reset, ResultSrc, PCSrc,
   ALUSrc, RegWrite,
   ImmSrc, ALUControl,
-  Zero, PC, Instr,
+  Instr[14:12], Zero, BranchYN, PC, Instr,
   ALUResult, WriteData, ReadData);
   
 endmodule // riscvsingle
@@ -98,40 +98,40 @@ module controller (input  logic [6:0] op,
       input  logic [2:0] funct3,
       input  logic       funct7b5,
       input  logic       Zero,
+      input  logic       BranchYN,
       output logic [1:0] ResultSrc,
       output logic       MemWrite,
       output logic       PCSrc, ALUSrc,
-      output logic       RegWrite, Jump,
+      output logic       RegWrite, JumpType,
       output logic [1:0] ImmSrc,
       output logic [2:0] ALUControl);
   
   logic [1:0] 			      ALUOp;
-  logic 			      Branch;
+  logic 			      BranchType;
   
-  maindec md (op, ResultSrc, MemWrite, Branch,
-        ALUSrc, RegWrite, Jump, ImmSrc, ALUOp);
+  maindec md (op, ResultSrc, MemWrite, BranchType,
+        ALUSrc, RegWrite, JumpType, ImmSrc, ALUOp);
   aludec ad (op[5], funct3, funct7b5, ALUOp, ALUControl);
   
   //assigns PCSrc=1 if: 
   //J-type
   //B type: (SrcA=SrcB, )
-  assign gt = 
-  assign PCSrc = (Branch & (Zero ^ funct3[0])) | Jump; , 
+  assign PCSrc = (BranchType & (BranchYN)) | JumpType; 
   
 endmodule // controller
 
 module maindec (input  logic [6:0] op,
   output logic [1:0] ResultSrc,
   output logic 	   MemWrite,
-  output logic 	   Branch, ALUSrc,
-  output logic 	   RegWrite, Jump,
+  output logic 	   BranchType, ALUSrc,
+  output logic 	   RegWrite, JumpType,
   output logic [1:0] ImmSrc,
   output logic [1:0] ALUOp);
   
   logic [10:0] 		   controls;
   
   assign {RegWrite, ImmSrc, ALUSrc, MemWrite,
-    ResultSrc, Branch, ALUOp, Jump} = controls;
+    ResultSrc, BranchType, ALUOp, JumpType} = controls;
   
   always_comb
     case(op)
@@ -139,7 +139,7 @@ module maindec (input  logic [6:0] op,
       7'b0000011: controls = 11'b1_00_1_0_01_0_00_0; // lw, lh, lb
       7'b0100011: controls = 11'b0_01_1_1_00_0_00_0; // sw
       7'b0110011: controls = 11'b1_xx_0_0_00_0_10_0; // R–type
-      7'b1100011: controls = 11'b0_10_0_0_00_1_01_0; // beq
+      7'b1100011: controls = 11'b0_10_0_0_00_1_01_0; // B-Type
       7'b0010011: controls = 11'b1_00_1_0_00_0_10_0; // I–type ALU
       7'b1101111: controls = 11'b1_11_0_0_10_0_00_1; // jal
       //7'b1100111: controls = 11'b1_11_0_0_10_0_00_1; // jalr
@@ -180,7 +180,7 @@ module aludec (input  logic       opb5,
                 3'b110: ALUControl = 3'b011; // or, ori
                 3'b111: ALUControl = 3'b010; // and, andi  
                 default: ALUControl = 3'bxxx; // ???
-    endcase // case (funct3)       
+              endcase // case (funct3)       
     endcase // case (ALUOp)
   
 endmodule // aludec
@@ -191,7 +191,9 @@ module datapath (input  logic        clk, reset,
     input  logic 	     RegWrite,
     input  logic [1:0]  ImmSrc,
     input  logic [2:0]  ALUControl,
-    output logic 	     Zero,
+    input  logic [2:0]  func3, //new
+    output logic 	      Zero,
+    output logic 	      BranchYN,
     output logic [31:0] PC,
     input  logic [31:0] Instr,
     output logic [31:0] ALUResult, WriteData,
@@ -213,7 +215,7 @@ module datapath (input  logic        clk, reset,
   extend  ext (Instr[31:7], ImmSrc, ImmExt);
   // ALU logic
   mux2 #(32)  srcbmux (WriteData, ImmExt, ALUSrc, SrcB);
-  alu  alu (SrcA, SrcB, ALUControl, ALUResult, Zero);
+  alu  alu (SrcA, SrcB, ALUControl, func3, ALUResult, Zero, BranchYN);
   mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4,ResultSrc, Result);
 
 endmodule // datapath
@@ -311,7 +313,7 @@ module dmem (input  logic        clk, we,
       input  logic [31:0] a, wd,
       output logic [31:0] rd);
   
-  logic [31:0] 		 RAM[63:0];
+  logic [31:0] 		 RAM[255:0];
   
   assign rd = RAM[a[31:2]]; // word aligned
   always_ff @(posedge clk)
@@ -321,13 +323,17 @@ endmodule // dmem
 
 module alu (input  logic [31:0] a, b,
             input  logic [2:0] 	alucontrol,
+            input  logic [2:0]  func3,
             output logic [31:0] ALUResult,
-            output logic 	zero);
+            output logic 	zero,
+            output logic BranchYN);
 
   logic [31:0] 	       condinvb, sum;
   logic 		       v;              // overflow. Q: why do we need this?
   logic 		       isAddSub;       // true when is add or subtract operation
 
+
+  branchComp bc(a, b, func3, BranchYN);
   assign condinvb = alucontrol[0] ? ~b : b;
   assign sum = a + condinvb + alucontrol[0];
   assign isAddSub = ~alucontrol[2] & ~alucontrol[1] |
@@ -370,4 +376,24 @@ module regfile (input  logic        clk,
     assign rd2 = (a2 != 0) ? rf[a2] : 0;
   
 endmodule // regfile
+
+module branchComp (input [31:0] a,
+                  input [31:0] b,
+                  input [2:0] funct3,
+                  output logic BranchYN);
+  logic [31:0] a_flip = {~a[31], a[30:0]};
+  logic [31:0] b_flip = {~b[31], a[30:0]};
+
+  always_comb
+    case (funct3)
+      3'b000:  BranchYN = (a == b);             // beq
+      3'b001:  BranchYN = ~(a == b);            // bne
+      3'b100:  BranchYN = (a_flip < b_flip);    // blt
+      3'b101:  BranchYN = ~(a_flip < b_flip);   // bge  
+      3'b110:  BranchYN = (a < b);              // bltu
+      3'b111:  BranchYN = ~(a < b);             // bgeu
+      default: BranchYN = 1'bx;
+    endcase
+
+endmodule
 
