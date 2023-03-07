@@ -165,18 +165,23 @@ module aludec (
         output logic [3:0] ALUControl);
   
   logic 			  RtypeSub;
+  logic 			  SubSra;
   
   //assign SubSRA = funct7b5 & opb5; // TRUE for R–type subtract, sra
+  
+  
+  assign SubSra = (((op == 7'b0010011) & (funct3 == 3'b101) & funct7b5) // case for SRL/SRA 
+                  | (op == 7'b0110011) & funct7b5);                    // case for Add/Sub
   always_comb
     
     
     case(op)
-      7'b0110111: ALUControl = 4'b1111; //LUI
+      7'b0110111: ALUControl = 4'b1110; //LUI
       default: case(ALUOp)
         2'b00: ALUControl = 4'b0000; // addition
         2'b01: ALUControl = 4'b0001; // subtraction
         default: case(funct3) // R–type or I–type ALU
-                  3'b000: if (RtypeSub)
+                  3'b000: if (SubSra)
                             ALUControl = 4'b0001; // sub
                           else
                             ALUControl = 4'b0000; // add, addi
@@ -193,7 +198,7 @@ module aludec (
                 endcase // case (funct3)       
       endcase // case (ALUOp)
     endcase
-    
+
   
 endmodule // aludec
 
@@ -363,7 +368,7 @@ module alu (input  logic [31:0] a, b,
       4'b0101:  ALUResult = sum[31] ^ v; // slt, slti  
       4'b0110:  ALUResult = a << b[4:0];      //sll, slli
       4'b0111:  ALUResult = a >> b[4:0];      //srl
-      4'b1111:  ALUResult = b << 12; //LUI
+      4'b1110:  ALUResult = b << 12; //LUI
       default: ALUResult = 32'bx;
     endcase
 
