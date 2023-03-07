@@ -40,7 +40,7 @@ module testbench();
    initial
      begin
 	string memfilename;
-        memfilename = {"../riscvtest/sllsrltest.memfile"};
+        memfilename = {"../riscvtest/mytest.memfile"};
         $readmemh(memfilename, dut.imem.RAM);
      end
 
@@ -144,6 +144,11 @@ module maindec (input  logic [6:0] op,
 endmodule // maindec
 
 // Computes ALUControl
+//make alucontrol 4'b0000
+//$signed
+//fuct7b5
+//targetselect module?
+//slt fix? 
 module aludec (input  logic       opb5,
 	       input  logic [2:0] funct3,
 	       input  logic 	  funct7b5,
@@ -330,7 +335,7 @@ module alu (input  logic [31:0] a, b,
        3'b010:  result = a & b;       // and
        3'b011:  result = a | b;       // or
        3'b100:  result = a ^ b;       // xor
-       3'b101:  result = sum[31] ^ v; // slt  
+       3'b101:  result = a < b;       // slt  
        3'b110:  result = a << b[4:0];      //sll
        3'b111:  result = a >> b[4:0];      //srl
        default: result = 32'bx;
