@@ -1150,3 +1150,260 @@ do ./riscv_single.do
 # ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
 # ** Warning: (vsim-PLI-3407) Too many data words read on line 65 of file "../riscvtest/lab1_tests/sltiu.memfile". (Current address [64], address range [0:63])    : riscv_single.sv(44)
 #    Time: 0 ns  Iteration: 0  Instance: /testbench
+add wave -r sim:/testbench/dut/rv32single/dp/alu/*
+add wave -r sim:/testbench/dut/rv32single/dp/alu/*
+do ./riscv_single.do
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
+# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 19:47:47 on Mar 07,2023
+# vlog -reportprogress 300 riscv_single.sv 
+# -- Compiling module testbench
+# -- Compiling module riscvsingle
+# -- Compiling module controller
+# -- Compiling module maindec
+# -- Compiling module aludec
+# -- Compiling module datapath
+# -- Compiling module adder
+# -- Compiling module extend
+# -- Compiling module flopr
+# -- Compiling module flopenr
+# -- Compiling module mux2
+# -- Compiling module mux3
+# -- Compiling module top
+# -- Compiling module imem
+# -- Compiling module dmem
+# -- Compiling module alu
+# -- Compiling module regfile
+# -- Compiling module branchComp
+# -- Compiling module LoadDec
+# ** Error: (vlog-13069) riscv_single.sv(427): near ",": syntax error, unexpected ',', expecting '}'.
+# ** Error: (vlog-13069) riscv_single.sv(428): near ",": syntax error, unexpected ',', expecting '}'.
+# ** Error: (vlog-13069) riscv_single.sv(430): near ",": syntax error, unexpected ',', expecting '}'.
+# ** Error: (vlog-13069) riscv_single.sv(431): near ",": syntax error, unexpected ',', expecting '}'.
+# End time: 19:47:48 on Mar 07,2023, Elapsed time: 0:00:01
+# Errors: 4, Warnings: 0
+# ** Error: C:/modeltech64_2021.2/win64/vlog failed.
+# Error in macro ././riscv_single.do line 30
+# C:/modeltech64_2021.2/win64/vlog failed.
+#     while executing
+# "vlog riscv_single.sv"
+do ./riscv_single.do
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
+# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 19:48:38 on Mar 07,2023
+# vlog -reportprogress 300 riscv_single.sv 
+# -- Compiling module testbench
+# -- Compiling module riscvsingle
+# -- Compiling module controller
+# -- Compiling module maindec
+# -- Compiling module aludec
+# -- Compiling module datapath
+# -- Compiling module adder
+# -- Compiling module extend
+# -- Compiling module flopr
+# -- Compiling module flopenr
+# -- Compiling module mux2
+# -- Compiling module mux3
+# -- Compiling module top
+# -- Compiling module imem
+# -- Compiling module dmem
+# -- Compiling module alu
+# -- Compiling module regfile
+# -- Compiling module branchComp
+# -- Compiling module LoadDec
+# 
+# Top level modules:
+# 	testbench
+# 	flopenr
+# End time: 19:48:38 on Mar 07,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 19:48:39 on Mar 07,2023, Elapsed time: 1:28:54
+# Errors: 2, Warnings: 1
+# vsim -debugdb -voptargs="+acc" work.testbench 
+# Start time: 19:48:39 on Mar 07,2023
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Note: (vsim-8611) Generating debug db.
+# ** Note: (vopt-4301) Memory core inferred for signal 'RAM' width=32, depth=256, type=RAM at location riscv_single.sv:336
+# Loading sv_std.std
+# Loading work.testbench(fast)
+# Loading work.top(fast)
+# Loading work.riscvsingle(fast)
+# Loading work.controller(fast)
+# Loading work.maindec(fast)
+# Loading work.aludec(fast)
+# Loading work.datapath(fast)
+# Loading work.flopr(fast)
+# Loading work.adder(fast)
+# Loading work.mux2(fast)
+# Loading work.regfile(fast)
+# Loading work.extend(fast)
+# Loading work.LoadDec(fast)
+# Loading work.alu(fast)
+# Loading work.branchComp(fast)
+# Loading work.mux3(fast)
+# Loading work.imem(fast)
+# Loading work.dmem(fast)
+# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
+# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
+# Simulation failed
+# ** Note: $stop    : riscv_single.sv(73)
+#    Time: 205 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at riscv_single.sv line 73
+add wave -position 52 sim:/testbench/dut/rv32single/dp/alu/*
+add dataflow \
+sim:/testbench/dut/rv32single/dp/alu/sum 
+# No drivers or ports for sum
+add dataflow \
+sim:/testbench/dut/rv32single/dp/alu/sum 
+# No drivers or ports for sum
+# Error Undo Start called while in Redo capture mode
+# Error Undo Start called while in Redo capture mode
+# UndoStart or Redo start was not called Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 86}
+#  Trace back: 
+#    <2:eval:1: ::Wave::UndoRedoCaptureTransform Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 86}
+#    <1:eval:1: ::Wave::ExecOp insert .main_pane.wave.interior.cs.body.pw.wf -noupdate -position 86 -tree .main_pane.wave.interior.cs.body.pw.wf.tree.tree1 -radix hexadecimal /testbench/dut/rv32single/dp/rf/clk
+# UndoStart or Redo start was not called Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 87}
+#  Trace back: 
+#    <2:eval:1: ::Wave::UndoRedoCaptureTransform Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 87}
+#    <1:eval:1: ::Wave::ExecOp insert .main_pane.wave.interior.cs.body.pw.wf -noupdate -position 87 -tree .main_pane.wave.interior.cs.body.pw.wf.tree.tree1 -radix hexadecimal /testbench/dut/rv32single/dp/rf/we3
+# UndoStart or Redo start was not called Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 88}
+#  Trace back: 
+#    <2:eval:1: ::Wave::UndoRedoCaptureTransform Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 88}
+#    <1:eval:1: ::Wave::ExecOp insert .main_pane.wave.interior.cs.body.pw.wf -noupdate -position 88 -tree .main_pane.wave.interior.cs.body.pw.wf.tree.tree1 -radix hexadecimal /testbench/dut/rv32single/dp/rf/a1
+# UndoStart or Redo start was not called Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 89}
+#  Trace back: 
+#    <2:eval:1: ::Wave::UndoRedoCaptureTransform Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 89}
+#    <1:eval:1: ::Wave::ExecOp insert .main_pane.wave.interior.cs.body.pw.wf -noupdate -position 89 -tree .main_pane.wave.interior.cs.body.pw.wf.tree.tree1 -radix hexadecimal /testbench/dut/rv32single/dp/rf/a2
+# UndoStart or Redo start was not called Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 90}
+#  Trace back: 
+#    <2:eval:1: ::Wave::UndoRedoCaptureTransform Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 90}
+#    <1:eval:1: ::Wave::ExecOp insert .main_pane.wave.interior.cs.body.pw.wf -noupdate -position 90 -tree .main_pane.wave.interior.cs.body.pw.wf.tree.tree1 -radix hexadecimal /testbench/dut/rv32single/dp/rf/a3
+# UndoStart or Redo start was not called Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 91}
+#  Trace back: 
+#    <2:eval:1: ::Wave::UndoRedoCaptureTransform Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 91}
+#    <1:eval:1: ::Wave::ExecOp insert .main_pane.wave.interior.cs.body.pw.wf -noupdate -position 91 -tree .main_pane.wave.interior.cs.body.pw.wf.tree.tree1 -radix hexadecimal /testbench/dut/rv32single/dp/rf/wd3
+# UndoStart or Redo start was not called Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 92}
+#  Trace back: 
+#    <2:eval:1: ::Wave::UndoRedoCaptureTransform Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 92}
+#    <1:eval:1: ::Wave::ExecOp insert .main_pane.wave.interior.cs.body.pw.wf -noupdate -position 92 -tree .main_pane.wave.interior.cs.body.pw.wf.tree.tree1 -radix hexadecimal /testbench/dut/rv32single/dp/rf/rd1
+# UndoStart or Redo start was not called Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 93}
+#  Trace back: 
+#    <2:eval:1: ::Wave::UndoRedoCaptureTransform Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 93}
+#    <1:eval:1: ::Wave::ExecOp insert .main_pane.wave.interior.cs.body.pw.wf -noupdate -position 93 -tree .main_pane.wave.interior.cs.body.pw.wf.tree.tree1 -radix hexadecimal /testbench/dut/rv32single/dp/rf/rd2
+# UndoStart or Redo start was not called Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 94}
+#  Trace back: 
+#    <2:eval:1: ::Wave::UndoRedoCaptureTransform Delete {.main_pane.wave.interior.cs.body.pw.wf.tree.tree1 undo delete 94}
+#    <1:eval:1: ::Wave::ExecOp insert .main_pane.wave.interior.cs.body.pw.wf -noupdate -position 94 -tree .main_pane.wave.interior.cs.body.pw.wf.tree.tree1 -radix hexadecimal /testbench/dut/rv32single/dp/rf/rf
+do ./riscv_single.do
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
+# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 20:14:58 on Mar 07,2023
+# vlog -reportprogress 300 riscv_single.sv 
+# -- Compiling module testbench
+# -- Compiling module riscvsingle
+# -- Compiling module controller
+# -- Compiling module maindec
+# -- Compiling module aludec
+# ** Error: riscv_single.sv(174): Illegal assignment expression in continuous assignment.
+# -- Compiling module datapath
+# -- Compiling module adder
+# -- Compiling module extend
+# -- Compiling module flopr
+# -- Compiling module flopenr
+# -- Compiling module mux2
+# -- Compiling module mux3
+# -- Compiling module top
+# -- Compiling module imem
+# -- Compiling module dmem
+# -- Compiling module alu
+# -- Compiling module regfile
+# -- Compiling module branchComp
+# -- Compiling module LoadDec
+# End time: 20:14:58 on Mar 07,2023, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# ** Error: C:/modeltech64_2021.2/win64/vlog failed.
+# Error in macro ././riscv_single.do line 30
+# C:/modeltech64_2021.2/win64/vlog failed.
+#     while executing
+# "vlog riscv_single.sv"
+do ./riscv_single.do
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
+# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 20:15:26 on Mar 07,2023
+# vlog -reportprogress 300 riscv_single.sv 
+# -- Compiling module testbench
+# -- Compiling module riscvsingle
+# -- Compiling module controller
+# -- Compiling module maindec
+# -- Compiling module aludec
+# -- Compiling module datapath
+# -- Compiling module adder
+# -- Compiling module extend
+# -- Compiling module flopr
+# -- Compiling module flopenr
+# -- Compiling module mux2
+# -- Compiling module mux3
+# -- Compiling module top
+# -- Compiling module imem
+# -- Compiling module dmem
+# -- Compiling module alu
+# -- Compiling module regfile
+# -- Compiling module branchComp
+# -- Compiling module LoadDec
+# 
+# Top level modules:
+# 	testbench
+# 	flopenr
+# End time: 20:15:26 on Mar 07,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 20:15:27 on Mar 07,2023, Elapsed time: 0:26:48
+# Errors: 2, Warnings: 0
+# vsim -debugdb -voptargs="+acc" work.testbench 
+# Start time: 20:15:27 on Mar 07,2023
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Note: (vsim-8611) Generating debug db.
+# Loading sv_std.std
+# Loading work.testbench(fast)
+# Loading work.top(fast)
+# Loading work.riscvsingle(fast)
+# Loading work.controller(fast)
+# Loading work.maindec(fast)
+# Loading work.aludec(fast)
+# Loading work.datapath(fast)
+# Loading work.flopr(fast)
+# Loading work.adder(fast)
+# Loading work.mux2(fast)
+# Loading work.regfile(fast)
+# Loading work.extend(fast)
+# Loading work.LoadDec(fast)
+# Loading work.alu(fast)
+# Loading work.branchComp(fast)
+# Loading work.mux3(fast)
+# Loading work.imem(fast)
+# Loading work.dmem(fast)
+# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
+# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
+# Simulation succeeded
+# ** Note: $stop    : riscv_single.sv(69)
+#    Time: 195 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at riscv_single.sv line 69

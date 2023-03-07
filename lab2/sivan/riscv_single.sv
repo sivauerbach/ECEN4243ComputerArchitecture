@@ -40,7 +40,12 @@ module testbench();
   initial
     begin
       string memfilename;
-      memfilename = {"../riscvtest/lab1_tests/sltiu.memfile"};
+      
+      /*Lab 1 test files: */
+      //memfilename = {"../riscvtest/lab1_tests/sltiu.memfile"};
+      
+      /* Main test file */
+      memfilename = {"../riscvtest/riscvtest.memfile"};
       $readmemh(memfilename, dut.imem.RAM);
     end
 
@@ -142,6 +147,7 @@ module maindec (input  logic [6:0] op,
       7'b1100011: controls = 11'b0_10_0_0_00_1_01_0; // B-Type
       7'b0010011: controls = 11'b1_00_1_0_00_0_10_0; // I–type ALU
       7'b1101111: controls = 11'b1_11_0_0_10_0_00_1; // jal
+      7'b0000011: controls = 11'b1_xx_x;
       //7'b1100111: controls = 11'b1_11_0_0_10_0_00_1; // jalr
       
       default: controls = 11'bx_xx_x_x_xx_x_xx_x; // ???
@@ -165,8 +171,8 @@ module aludec (
   logic 			  SubSra;
   
   // TRUE for SUB, SRA, SRAI
-  assign SubSra = (((op == 7'b0010011) | (op == 7'b0110011)) 
-                                  & funct7b5) ? 1'b1 : 1'bx; 
+  assign SubSra = (((op == 7'b0010011) & (funct3 == 3'b101) & funct7b5) // case for SRL/SRA 
+                  | (op == 7'b0110011) & funct7b5);                    // case for Add/Sub
   always_comb
     case(ALUOp)
       2'b00: ALUControl = 4'b0000; // addition
@@ -198,18 +204,19 @@ module datapath (input  logic        clk, reset,
     input  logic 	     RegWrite,
     input  logic [1:0]  ImmSrc,
     input  logic [3:0]  ALUControl,
-    input  logic [2:0]  func3, //new
+    input  logic [2:0]  funct3, //new
     output logic 	      Zero,
     output logic 	      BranchYN,
     output logic [31:0] PC,
     input  logic [31:0] Instr,
     output logic [31:0] ALUResult, WriteData,
-    input  logic [31:0] ReadData);
+    input  logic [31:0] ReadData/*Full chunk of data from DataMem*/);
   
   logic [31:0] 		     PCNext, PCPlus4, PCTarget;
   logic [31:0] 		     ImmExt;
   logic [31:0] 		     SrcA, SrcB;
   logic [31:0] 		     Result;
+  logic [31:0]         ModReadData;
   
   // next PC logic
   flopr #(32) pcreg (clk, reset, PCNext, PC); // parameter WIDTH=32
@@ -220,10 +227,12 @@ module datapath (input  logic        clk, reset,
   regfile  rf (clk, RegWrite, Instr[19:15], Instr[24:20],
         Instr[11:7], Result, SrcA, WriteData);
   extend  ext (Instr[31:7], ImmSrc, ImmExt);
+  //Load-Type inst Data
+  LoadDec loaddec (ReadData, funct3, ModReadData);
   // ALU logic
   mux2 #(32)  srcbmux (WriteData, ImmExt, ALUSrc, SrcB);
-  alu  alu (SrcA, SrcB, ALUControl, func3, ALUResult, Zero, BranchYN);
-  mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4,ResultSrc, Result);
+  alu  alu (SrcA, SrcB, ALUControl, funct3, ALUResult, Zero, BranchYN);
+  mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4, ResultSrc, Result);
 
 endmodule // datapath
 
@@ -262,7 +271,7 @@ module flopr #(parameter WIDTH = 8)
     if (reset) q <= 0;
     else  q <= d;
   
-endmodule // flopr
+  endmodule // flopr
 
 module flopenr #(parameter WIDTH = 8)
   (input  logic             clk, reset, en,
@@ -273,25 +282,29 @@ module flopenr #(parameter WIDTH = 8)
     if (reset)  q <= 0;
     else if (en) q <= d;
   
-endmodule // flopenr
+  endmodule // flopenr
 
 module mux2 #(parameter WIDTH = 8)
   (input  logic [WIDTH-1:0] d0, d1,
   input logic 	     s,
   output logic [WIDTH-1:0] y);
   
-assign y = s ? d1 : d0;
+  assign y = s ? d1 : d0;
   
-endmodule // mux2
+  endmodule // mux2
 
 module mux3 #(parameter WIDTH = 8)
   (input  logic [WIDTH-1:0] d0, d1, d2,
   input logic [1:0] 	     s,
   output logic [WIDTH-1:0] y);
   
-assign y = s[1] ? d2 : (s[0] ? d1 : d0);
+  // for ResultSrc = 0: output = d0 = ALUResult
+  // for ResultSrc = 1: output = d1 = ReadData
+  // for ResultSrc = 2: output = d2 = PCPlus4
+  // for ResultSrc = 3: output = d3 = PCPlus4
+  assign y = s[1] ? d2 : (s[0] ? d1 : d0);
   
-endmodule // mux3
+  endmodule // mux3
 
 module top (input  logic        clk, reset,
     output logic [31:0] WriteData, DataAdr,
@@ -300,12 +313,12 @@ module top (input  logic        clk, reset,
   logic [31:0] 		PC, Instr, ReadData;
   
   // instantiate processor and memories
-  riscvsingle rv32single (clk, reset, PC, Instr, MemWrite, DataAdr,
+  riscvsingle rv32single (clk, reset, PC, Instr, MemWrite, DataAdr,/*=ALUResult*/
         WriteData, ReadData);
   imem imem (PC, Instr);
   dmem dmem (clk, MemWrite, DataAdr, WriteData, ReadData);
   
-endmodule // top
+  endmodule // top
 
 module imem (input  logic [31:0] a,
       output logic [31:0] rd);
@@ -314,7 +327,7 @@ module imem (input  logic [31:0] a,
   
   assign rd = RAM[a[31:2]]; // word aligned
   
-endmodule // imem
+  endmodule // imem
 
 module dmem (input  logic        clk, we,
       input  logic [31:0] a, wd,
@@ -326,11 +339,11 @@ module dmem (input  logic        clk, we,
   always_ff @(posedge clk)
     if (we) RAM[a[31:2]] <= wd;
   
-endmodule // dmem
+  endmodule // dmem
 
 module alu (input  logic [31:0] a, b,
             input  logic [3:0] 	alucontrol,
-            input  logic [2:0]  func3,
+            input  logic [2:0]  funct3,
             output logic [31:0] ALUResult,
             output logic 	zero,
             output logic BranchYN);
@@ -340,7 +353,7 @@ module alu (input  logic [31:0] a, b,
   logic 		       isAddSub;       // true when is add or subtract operation
 
 
-  branchComp bc(a, b, func3, BranchYN);
+  branchComp bc(a, b, funct3, BranchYN);
   assign condinvb = alucontrol[0] ? ~b : b;
   assign {c,sum} = a + condinvb + alucontrol[0];
   assign isAddSub = ~alucontrol[2] & ~alucontrol[1] |
@@ -369,9 +382,9 @@ endmodule // alu
 
 module regfile (input  logic        clk, 
 		input  logic 	    we3, 
-		input  logic [4:0]  a1, a2, a3, 
-		input  logic [31:0] wd3, 
-		output logic [31:0] rd1, rd2);
+		input  logic [4:0]  a1, a2, a3, // a1=Rs1, a2=Rs2, a3=Rd
+		input  logic [31:0] wd3,        // wd3 = Result
+		output logic [31:0] rd1, rd2);  // rd1 = SrcA, rd2 = WriteData
 
   logic [31:0] 		    rf[31:0];
 
@@ -405,3 +418,18 @@ module branchComp (input [31:0] a,
 
 endmodule
 
+module LoadDec( input logic [31:0] ReadData,
+                input logic [2:0]   funct3,
+                output logic [31:0] ModReadData);
+
+  always_comb
+    case (funct3)
+      3'b000:  ModReadData = {{24{ReadData[7]}}, ReadData[7:0]};    // lb
+      3'b001:  ModReadData = {{16{ReadData[15]}}, ReadData[15:0]};  // lh
+      3'b010:  ModReadData = ReadData;                         // lw
+      3'b100:  ModReadData = {{24{1'b0}}, ReadData[7:0]};           // lbu
+      3'b101:  ModReadData = {{16{1'b0}}, ReadData[15:0]};          // lhu
+      default: ModReadData = 32'bx;
+    endcase
+
+endmodule
