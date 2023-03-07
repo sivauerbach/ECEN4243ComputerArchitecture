@@ -40,7 +40,7 @@ module testbench();
   initial
     begin
       string memfilename;
-      memfilename = {"../riscvtest/mytest.memfile"};
+      memfilename = {"../riscvtest/lab1_tests/lui.memfile"};
       $readmemh(memfilename, dut.imem.RAM);
     end
 
@@ -129,7 +129,7 @@ module maindec (input  logic [6:0] op,
   output logic [2:0] ImmSrc,
   output logic [1:0] ALUOp);
   
-  logic [10:0] 		   controls;
+  logic [11:0] 		   controls;
   
   assign {RegWrite, ImmSrc, ALUSrc, MemWrite,
     ResultSrc, BranchType, ALUOp, JumpType} = controls;
@@ -137,16 +137,16 @@ module maindec (input  logic [6:0] op,
   always_comb
     case(op)
       // RegWrite_ImmSrc_ALUSrc_MemWrite_ResultSrc_Branch_ALUOp_Jump
-      7'b0000011: controls = 11'b1_000_1_0_01_0_00_0; // lw, lh, lb
-      7'b0110111: controls = 11'b1_100_1_0_00_0_10_0; //lui in ALU
-      7'b0100011: controls = 11'b0_001_1_1_00_0_00_0; // sw
-      7'b0110011: controls = 11'b1_xxx_0_0_00_0_10_0; // R–type
-      7'b1100011: controls = 11'b0_010_0_0_00_1_01_0; // B-Type
-      7'b0010011: controls = 11'b1_000_1_0_00_0_10_0; // I–type ALU
-      7'b1101111: controls = 11'b1_011_0_0_10_0_00_1; // jal
-      //7'b1100111: controls = 11'b1_11_0_0_10_0_00_1; // jalr
+      7'b0000011: controls = 12'b1_000_1_0_01_0_00_0; // lw, lh, lb
+      7'b0110111: controls = 12'b1_100_1_0_00_0_10_0; //lui in ALU
+      7'b0100011: controls = 12'b0_001_1_1_00_0_00_0; // sw
+      7'b0110011: controls = 12'b1_xxx_0_0_00_0_10_0; // R–type
+      7'b1100011: controls = 12'b0_010_0_0_00_1_01_0; // B-Type
+      7'b0010011: controls = 12'b1_000_1_0_00_0_10_0; // I–type ALU
+      7'b1101111: controls = 12'b1_011_0_0_10_0_00_1; // jal
+      //7'b1100111: controls = 12'b1_11_0_0_10_0_00_1; // jalr
       
-      default: controls = 11'bx_xx_x_x_xx_x_xx_x; // ???
+      default: controls = 12'bx_xxx_x_x_xx_x_xx_x; // ???
 
       // Define ALUSrc: 0=R type    1=I type (Source for SrcB)
       //
@@ -333,7 +333,7 @@ module dmem (input  logic        clk, we,
 endmodule // dmem
 
 module alu (input  logic [31:0] a, b,
-            input  logic [2:0] 	alucontrol,
+            input  logic [3:0] 	alucontrol,
             input  logic [2:0]  func3,
             output logic [31:0] ALUResult,
             output logic 	zero,

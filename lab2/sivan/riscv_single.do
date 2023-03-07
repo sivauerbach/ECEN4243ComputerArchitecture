@@ -67,6 +67,7 @@ add wave -hex /testbench/dut/rv32single/dp/rf/*
 add wave -hex /testbench/dut/rv32single/dp/rf/rf
 
 
+
 -- Set Wave Output Items 
 TreeUpdate [SetDefaultTree]
 WaveRestoreZoom {0 ps} {200 ns}

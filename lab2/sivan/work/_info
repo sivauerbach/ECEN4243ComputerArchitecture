@@ -32,6 +32,16 @@ R0
 R0
 R0
 R0
+R0
+R0
+R0
+R0
+R0
+R0
+R0
+R0
+R0
+R0
 !s11f MIXED_VERSIONS
 R0
 R0
@@ -57,10 +67,10 @@ n@_opt
 OL;O;2021.2;73
 R1
 T_opt1
-!s110 1678212741
-VOMDm_Q:?V24eWhmeK@dTe1
+!s110 1678221182
+V_nCe59]HQzSg7G^^zRj_E2
 R2
-=1-9078415aa05f-64077e84-1fe-644c
+=1-9078415aa05f-64079f7e-83-88c8
 R3
 R4
 R5
@@ -68,13 +78,13 @@ n@_opt1
 OL;O;2021.3;73
 vadder
 Z6 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z7 !s110 1678212737
+Z7 !s110 1678221178
 !i10b 1
 !s100 f6lA]GE@FRnNPg<1hCO_m0
 I^U:eKXmORNP;nil2IKiG61
 S1
 Z8 dC:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan
-Z9 w1678212732
+Z9 w1678221175
 Z10 8riscv_single.sv
 Z11 Friscv_single.sv
 !i122 0
@@ -84,7 +94,7 @@ Z13 OL;L;2021.3;73
 r1
 !s85 0
 31
-Z14 !s108 1678212736.000000
+Z14 !s108 1678221178.000000
 Z15 !s107 riscv_single.sv|
 Z16 !s90 -reportprogress|300|riscv_single.sv|
 !i113 0
@@ -94,8 +104,8 @@ valu
 R6
 R7
 !i10b 1
-!s100 [K[gAgOe_Cc]5ojP=l93b2
-Inm15JfEOIT=7m=ZDfRbaB0
+!s100 6=mQ6PSFgWcgIWTH[24AR2
+IWA:T8b7@=kU3`KfS3991M1
 S1
 R8
 R9
@@ -335,8 +345,8 @@ vmaindec
 R6
 R7
 !i10b 1
-!s100 SbTGTh;G5n>3zl>OQOVdg3
-IiY59K@W7a74MIhNEdoSi^0
+!s100 mR8;XIjOcIl`>IzH_OHPL2
+II;>0MF_]Uil@f6Ik`^L=11
 S1
 R8
 R9
@@ -455,8 +465,8 @@ vtestbench
 R6
 R7
 !i10b 1
-!s100 ;N39zf`>WkBeB21SOeg];1
-I_zo;:cB0T9gBWQECzUO@;3
+!s100 P3[NYd0E18G3MFIXeh<:90
+I=1PDbe8[bi^JJ_:B9U=DE2
 S1
 R8
 R9
