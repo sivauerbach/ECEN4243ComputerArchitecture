@@ -1,0 +1,459 @@
+m255
+K4
+z2
+Z0 !s99 nomlopt
+R0
+R0
+R0
+R0
+!s11f vlog 2021.2 2021.04, Apr 14 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z1 dC:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan
+T_opt
+!s110 1678152788
+VikzkgLRZajl]dkM4P?A@22
+04 9 4 work testbench fast 0
+=1-a44cc866e7df-64069453-30d-5bb4
+!s124 OEM100
+o-quiet -auto_acc_if_foreign -work work -debugdb +acc
+Z2 tCvgOpt 0
+n@_opt
+OL;O;2021.2;73
+vadder
+Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z4 !s110 1678152785
+!i10b 1
+!s100 Q4md?XDeCMg_<N0[jH7?41
+ITgYA8MG6oSz20W2>U:f<T0
+S1
+R1
+Z5 w1678131179
+Z6 8riscv_single.sv
+Z7 Friscv_single.sv
+!i122 0
+L0 223 6
+Z8 VDg1SIo80bB@j0V0VzS_@n1
+Z9 OL;L;2021.2;73
+r1
+!s85 0
+31
+Z10 !s108 1678152784.000000
+Z11 !s107 riscv_single.sv|
+Z12 !s90 -reportprogress|300|riscv_single.sv|
+!i113 0
+Z13 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
+valu
+R3
+R4
+!i10b 1
+!s100 =UUQEB8;Eg6@G[NV6M<zW3
+I8[do2>CN9G60IJP644<Z=1
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 324 35
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+valudec
+R3
+R4
+!i10b 1
+!s100 ?cRMGY6X8fPB?=<HFQQGY2
+IRoRjO]P>SkG48V6S0MP?<0
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 158 29
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vbranchComp
+R3
+R4
+!i10b 1
+!s100 jkl^LcHF@]`=Haf=;JFRK1
+IDYej0QJC989FIIiN9b4T41
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 380 17
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+nbranch@comp
+vcontroller
+R3
+R4
+!i10b 1
+!s100 aS2W<c]E;W;LA]0lin]WJ3
+IAUL2LaJ5z8m@>MJ[LMbG31
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 97 25
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vdatapath
+R3
+R4
+!i10b 1
+!s100 C7BAQ;:kVc0nbX2V[^mb`3
+IC[O@Qzl:hiolBzC[9Z4lH3
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 188 34
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vdmem
+R3
+R4
+!i10b 1
+!s100 2>0Zhjz42TaoRQ>mgGXFF1
+I:Od?`Ci[94OO:jMC9__hG3
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 312 11
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vextend
+R3
+R4
+!i10b 1
+!s100 UF7kTeQaCPlUFEJT5To1`0
+IlSYe:LN?IS4a@D7zGK:la2
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 230 18
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vflopenr
+R3
+R4
+!i10b 1
+!s100 W^QEEg;fE;HlAH@o=iG3A0
+Ib@YleLi1B9UCK[bM07F[50
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 260 10
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vflopr
+R3
+R4
+!i10b 1
+!s100 aG5I:d1b9oHX_V]lZoL2W2
+IJ4D5_zOfiA@f5a:2GgFMg3
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 249 10
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vimem
+R3
+R4
+!i10b 1
+!s100 bRM>aEzhO^]M986EFNi;`1
+I>Y<MS;z96<UKk`jW]`[Oa1
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 303 8
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vmaindec
+R3
+R4
+!i10b 1
+!s100 >4LL:V7bEnaBk=j<S0aJM3
+INSZiA9Ib^Ig6aDdC5nb3m1
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 123 33
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vmux2
+R3
+R4
+!i10b 1
+!s100 zZL2<A>2DjE@INY5]Ba^z3
+I>e19HO4n:NFm180jkUO221
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 271 8
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vmux3
+R3
+R4
+!i10b 1
+!s100 kWg;6Xfl[TzlO;S`@z[Z70
+IQP:n8RO>akXf21d_82Lj90
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 280 8
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vregfile
+R3
+R4
+!i10b 1
+!s100 UVSQoWHjJoA9[>8D;AXlo2
+I_TCabjI8D@8k;5Ga@?o:c1
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 360 19
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vriscvsingle
+R3
+R4
+!i10b 1
+!s100 BOGE_[WUaBQT9gW[0JDkY3
+IGL1IeM6EABMHNOK:D=3bU0
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 74 22
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vtestbench
+R3
+R4
+!i10b 1
+!s100 208U@<oGd3nddb7<__3?z2
+IfNH9=X1:Obh`?zLY8`8;F3
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 28 45
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
+vtop
+R3
+R4
+!i10b 1
+!s100 IYceF05iW8fP?5K3QK0UC0
+ISdd0F4SWBB^69kIoC1@EJ1
+S1
+R1
+R5
+R6
+R7
+!i122 0
+L0 289 13
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R2
