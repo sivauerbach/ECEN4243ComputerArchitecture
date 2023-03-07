@@ -183,7 +183,10 @@ module aludec (
                   3'b001: ALUControl = 4'b0110; //sll, slli
                   3'b010: ALUControl = 4'b0101; // slt, slti
                   3'b100: ALUControl = 4'b0100; // xor, xori
-                  3'b101: ALUControl = 4'b0111; //srl srli
+                  3'b101: if (SubSra)
+                          ALUControl = 4'b1111; //sra, srai
+                        else
+                          ALUControl = 4'b0111; //srl srli
                   3'b110: ALUControl = 4'b0011; // or, ori
                   3'b111: ALUControl = 4'b0010; // and, andi  
                   default: ALUControl = 4'bxxxx; // ???
