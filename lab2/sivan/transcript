@@ -1,4 +1,4 @@
-# //  ModelSim SE-64 2021.2 Apr 14 2021
+# //  ModelSim SE-64 2021.3 Jul 13 2021
 # //
 # //  Copyright 1991-2021 Mentor Graphics Corporation
 # //  All Rights Reserved.
@@ -11,14 +11,24 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# do ./riscv_single.do
-# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
-# Start time: 01:06:33 on Mar 07,2023
+# do {.\riscv_single.do}
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
+# Start time: 12:01:20 on Mar 07,2023
 # vlog -reportprogress 300 riscv_single.sv 
 # -- Compiling module testbench
 # -- Compiling module riscvsingle
 # -- Compiling module controller
 # -- Compiling module maindec
+# ** Warning: riscv_single.sv(139): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(140): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(141): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(142): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(143): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(144): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(145): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
 # -- Compiling module aludec
 # -- Compiling module datapath
 # -- Compiling module adder
@@ -37,13 +47,13 @@
 # Top level modules:
 # 	testbench
 # 	flopenr
-# End time: 01:06:33 on Mar 07,2023, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
+# End time: 12:01:20 on Mar 07,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 7
 # vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 01:06:33 on Mar 07,2023
+# Start time: 12:01:20 on Mar 07,2023
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Note: (vsim-8611) Generating debug db.
-# ** Note: (vopt-4301) Memory core inferred for signal 'RAM' width=32, depth=256, type=RAM at location riscv_single.sv:316
+# ** Note: (vopt-4301) Memory core inferred for signal 'RAM' width=32, depth=256, type=RAM at location riscv_single.sv:326
 # Loading sv_std.std
 # Loading work.testbench(fast)
 # Loading work.top(fast)
@@ -62,31 +72,45 @@
 # Loading work.mux3(fast)
 # Loading work.imem(fast)
 # Loading work.dmem(fast)
+# ** Warning: (vsim-3015) [PCDPC] - Port size (3) does not match connection size (2) for port 'ImmSrc'. The port definition is at: riscv_single.sv(106).
+#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c File: riscv_single.sv Line: 85
+# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (3) for port 'ImmSrc'. The port definition is at: riscv_single.sv(128).
+#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c/md File: riscv_single.sv Line: 112
+# ** Warning: (vsim-3015) [PCDPC] - Port size (3) does not match connection size (2) for port 'ImmSrc'. The port definition is at: riscv_single.sv(200).
+#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/dp File: riscv_single.sv Line: 89
+# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (3) for port 'immsrc'. The port definition is at: riscv_single.sv(239).
+#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/dp/ext File: riscv_single.sv Line: 223
+# ** Warning: (vsim-3015) [PCDPC] - Port size (3) does not match connection size (4) for port 'alucontrol'. The port definition is at: riscv_single.sv(335).
+#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/dp/alu File: riscv_single.sv Line: 226
 # ** Note: (vsim-8900) Creating design debug database vsim.dbg.
 # ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
-# Debug data file does not match loaded design.
-# Debug data file does not match loaded design.
-# ** Error: Could not open the database because of the following problem accessing the required debug information:
-# Debug data file does not match loaded design.
-# Error in macro ././riscv_single.do line 86
-# Could not open the database because of the following problem accessing the required debug information:
-# Debug data file does not match loaded design.
-#     while executing
-# "add schematic -full sim:/testbench/dut/rv32single"
-do ./riscv_single.do
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 23476
+#           Attempting to use alternate WLF file "./wlftf63rei".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftf63rei
+do {.\riscv_single.do}
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
-# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt/__mti.dbg".
-# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt".
-# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is jacks@DESKTOP-K531KCD.
+# Error 31: Unable to unlink file "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt1/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt1".
+# Error 133: Unable to remove directory "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
 # ** Warning: (vlib-34) Library already exists at "work".
 # Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
-# Start time: 01:17:24 on Mar 07,2023
+# Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
+# Start time: 12:10:22 on Mar 07,2023
 # vlog -reportprogress 300 riscv_single.sv 
 # -- Compiling module testbench
 # -- Compiling module riscvsingle
 # -- Compiling module controller
 # -- Compiling module maindec
+# ** Warning: riscv_single.sv(139): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(140): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(141): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(142): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(143): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(144): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(145): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
 # -- Compiling module aludec
 # -- Compiling module datapath
 # -- Compiling module adder
@@ -105,12 +129,12 @@ do ./riscv_single.do
 # Top level modules:
 # 	testbench
 # 	flopenr
-# End time: 01:17:24 on Mar 07,2023, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# End time: 01:17:26 on Mar 07,2023, Elapsed time: 0:10:53
-# Errors: 2, Warnings: 0
+# End time: 12:10:22 on Mar 07,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 7
+# End time: 12:10:26 on Mar 07,2023, Elapsed time: 0:09:06
+# Errors: 1, Warnings: 7
 # vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 01:17:27 on Mar 07,2023
+# Start time: 12:10:26 on Mar 07,2023
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Note: (vsim-8611) Generating debug db.
 # Loading sv_std.std
@@ -131,31 +155,43 @@ do ./riscv_single.do
 # Loading work.mux3(fast)
 # Loading work.imem(fast)
 # Loading work.dmem(fast)
+# ** Warning: (vsim-3015) [PCDPC] - Port size (3) does not match connection size (2) for port 'ImmSrc'. The port definition is at: riscv_single.sv(106).
+#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c File: riscv_single.sv Line: 85
+# ** Warning: (vsim-3015) [PCDPC] - Port size (2) does not match connection size (3) for port 'ImmSrc'. The port definition is at: riscv_single.sv(128).
+#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/c/md File: riscv_single.sv Line: 112
+# ** Warning: (vsim-3015) [PCDPC] - Port size (3) does not match connection size (2) for port 'ImmSrc'. The port definition is at: riscv_single.sv(200).
+#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/dp File: riscv_single.sv Line: 89
+# ** Warning: (vsim-3015) [PCDPC] - Port size (3) does not match connection size (4) for port 'alucontrol'. The port definition is at: riscv_single.sv(335).
+#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/dp/alu File: riscv_single.sv Line: 226
 # ** Note: (vsim-8900) Creating design debug database vsim.dbg.
 # ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
-# Debug data file does not match loaded design.
-# Debug data file does not match loaded design.
-# ** Error: Could not open the database because of the following problem accessing the required debug information:
-# Debug data file does not match loaded design.
-# Error in macro ././riscv_single.do line 86
-# Could not open the database because of the following problem accessing the required debug information:
-# Debug data file does not match loaded design.
-#     while executing
-# "add schematic -full sim:/testbench/dut/rv32single"
-do ./riscv_single.do
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 23476
+#           Attempting to use alternate WLF file "./wlftitn2fj".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftitn2fj
+do {.\riscv_single.do}
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
-# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt/__mti.dbg".
-# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt".
-# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is jacks@DESKTOP-K531KCD.
+# Error 31: Unable to unlink file "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt1/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt1".
+# Error 133: Unable to remove directory "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
 # ** Warning: (vlib-34) Library already exists at "work".
 # Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
-# Start time: 01:21:06 on Mar 07,2023
+# Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
+# Start time: 12:12:16 on Mar 07,2023
 # vlog -reportprogress 300 riscv_single.sv 
 # -- Compiling module testbench
 # -- Compiling module riscvsingle
 # -- Compiling module controller
 # -- Compiling module maindec
+# ** Warning: riscv_single.sv(140): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(141): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(142): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(143): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(144): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(145): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
+# ** Warning: riscv_single.sv(146): (vlog-2600) [RDGN] - Redundant digits in numeric literal.
 # -- Compiling module aludec
 # -- Compiling module datapath
 # -- Compiling module adder
@@ -174,82 +210,15 @@ do ./riscv_single.do
 # Top level modules:
 # 	testbench
 # 	flopenr
-# End time: 01:21:06 on Mar 07,2023, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# End time: 01:21:08 on Mar 07,2023, Elapsed time: 0:03:41
-# Errors: 2, Warnings: 0
+# End time: 12:12:17 on Mar 07,2023, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 7
+# End time: 12:12:20 on Mar 07,2023, Elapsed time: 0:01:54
+# Errors: 1, Warnings: 6
 # vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 01:21:08 on Mar 07,2023
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-# Loading sv_std.std
-# Loading work.testbench(fast)
-# Loading work.top(fast)
-# Loading work.riscvsingle(fast)
-# Loading work.controller(fast)
-# Loading work.maindec(fast)
-# Loading work.aludec(fast)
-# Loading work.datapath(fast)
-# Loading work.flopr(fast)
-# Loading work.adder(fast)
-# Loading work.mux2(fast)
-# Loading work.regfile(fast)
-# Loading work.extend(fast)
-# Loading work.alu(fast)
-# Loading work.branchComp(fast)
-# Loading work.mux3(fast)
-# Loading work.imem(fast)
-# Loading work.dmem(fast)
-# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
-# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
-# Debug data file does not match loaded design.
-# Debug data file does not match loaded design.
-# ** Error: Could not open the database because of the following problem accessing the required debug information:
-# Debug data file does not match loaded design.
-# Error in macro ././riscv_single.do line 86
-# Could not open the database because of the following problem accessing the required debug information:
-# Debug data file does not match loaded design.
-#     while executing
-# "add schematic -full sim:/testbench/dut/rv32single"
-do ./riscv_single.do
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
-# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt/__mti.dbg".
-# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt".
-# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
-# ** Warning: (vlib-34) Library already exists at "work".
-# Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
-# Start time: 01:29:30 on Mar 07,2023
-# vlog -reportprogress 300 riscv_single.sv 
-# -- Compiling module testbench
-# -- Compiling module riscvsingle
-# -- Compiling module controller
-# -- Compiling module maindec
-# -- Compiling module aludec
-# -- Compiling module datapath
-# -- Compiling module adder
-# -- Compiling module extend
-# -- Compiling module flopr
-# -- Compiling module flopenr
-# -- Compiling module mux2
-# -- Compiling module mux3
-# -- Compiling module top
-# -- Compiling module imem
-# -- Compiling module dmem
-# -- Compiling module alu
-# -- Compiling module regfile
-# -- Compiling module branchComp
-# 
-# Top level modules:
-# 	testbench
-# 	flopenr
-# End time: 01:29:30 on Mar 07,2023, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# End time: 01:29:32 on Mar 07,2023, Elapsed time: 0:08:24
-# Errors: 2, Warnings: 0
-# vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 01:29:32 on Mar 07,2023
+# Start time: 12:12:20 on Mar 07,2023
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Note: (vsim-8611) Generating debug db.
+# ** Note: (vopt-4301) Memory core inferred for signal 'RAM' width=32, depth=256, type=RAM at location riscv_single.sv:327
 # Loading sv_std.std
 # Loading work.testbench(fast)
 # Loading work.top(fast)
@@ -268,132 +237,12 @@ do ./riscv_single.do
 # Loading work.mux3(fast)
 # Loading work.imem(fast)
 # Loading work.dmem(fast)
+# ** Warning: (vsim-3015) [PCDPC] - Port size (3) does not match connection size (4) for port 'alucontrol'. The port definition is at: riscv_single.sv(336).
+#    Time: 0 ns  Iteration: 0  Instance: /testbench/dut/rv32single/dp/alu File: riscv_single.sv Line: 227
 # ** Note: (vsim-8900) Creating design debug database vsim.dbg.
 # ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
-# ** Warning: (vsim-PLI-3407) Too many data words read on line 65 of file "../riscvtest/lab1_tests/bge.memfile". (Current address [64], address range [0:63])    : riscv_single.sv(44)
-#    Time: 0 ns  Iteration: 0  Instance: /testbench
-do ./riscv_single.do
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
-# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt/__mti.dbg".
-# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt".
-# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
-# ** Warning: (vlib-34) Library already exists at "work".
-# Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
-# Start time: 01:31:22 on Mar 07,2023
-# vlog -reportprogress 300 riscv_single.sv 
-# -- Compiling module testbench
-# -- Compiling module riscvsingle
-# -- Compiling module controller
-# -- Compiling module maindec
-# -- Compiling module aludec
-# -- Compiling module datapath
-# -- Compiling module adder
-# -- Compiling module extend
-# -- Compiling module flopr
-# -- Compiling module flopenr
-# -- Compiling module mux2
-# -- Compiling module mux3
-# -- Compiling module top
-# -- Compiling module imem
-# -- Compiling module dmem
-# -- Compiling module alu
-# -- Compiling module regfile
-# -- Compiling module branchComp
-# 
-# Top level modules:
-# 	testbench
-# 	flopenr
-# End time: 01:31:22 on Mar 07,2023, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# End time: 01:31:24 on Mar 07,2023, Elapsed time: 0:01:52
-# Errors: 1, Warnings: 1
-# vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 01:31:24 on Mar 07,2023
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Note: (vsim-8611) Generating debug db.
-# Loading sv_std.std
-# Loading work.testbench(fast)
-# Loading work.top(fast)
-# Loading work.riscvsingle(fast)
-# Loading work.controller(fast)
-# Loading work.maindec(fast)
-# Loading work.aludec(fast)
-# Loading work.datapath(fast)
-# Loading work.flopr(fast)
-# Loading work.adder(fast)
-# Loading work.mux2(fast)
-# Loading work.regfile(fast)
-# Loading work.extend(fast)
-# Loading work.alu(fast)
-# Loading work.branchComp(fast)
-# Loading work.mux3(fast)
-# Loading work.imem(fast)
-# Loading work.dmem(fast)
-# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
-# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
-# ** Warning: (vsim-PLI-3407) Too many data words read on line 65 of file "../riscvtest/lab1_tests/blt.memfile". (Current address [64], address range [0:63])    : riscv_single.sv(44)
-#    Time: 0 ns  Iteration: 0  Instance: /testbench
-do ./riscv_single.do
-# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
-# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt/__mti.dbg".
-# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt".
-# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
-# ** Warning: (vlib-34) Library already exists at "work".
-# Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
-# Start time: 01:33:04 on Mar 07,2023
-# vlog -reportprogress 300 riscv_single.sv 
-# -- Compiling module testbench
-# -- Compiling module riscvsingle
-# -- Compiling module controller
-# -- Compiling module maindec
-# -- Compiling module aludec
-# -- Compiling module datapath
-# -- Compiling module adder
-# -- Compiling module extend
-# -- Compiling module flopr
-# -- Compiling module flopenr
-# -- Compiling module mux2
-# -- Compiling module mux3
-# -- Compiling module top
-# -- Compiling module imem
-# -- Compiling module dmem
-# -- Compiling module alu
-# -- Compiling module regfile
-# -- Compiling module branchComp
-# 
-# Top level modules:
-# 	testbench
-# 	flopenr
-# End time: 01:33:05 on Mar 07,2023, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-# End time: 01:33:07 on Mar 07,2023, Elapsed time: 0:01:43
-# Errors: 1, Warnings: 1
-# vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 01:33:07 on Mar 07,2023
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Note: (vsim-8611) Generating debug db.
-# Loading sv_std.std
-# Loading work.testbench(fast)
-# Loading work.top(fast)
-# Loading work.riscvsingle(fast)
-# Loading work.controller(fast)
-# Loading work.maindec(fast)
-# Loading work.aludec(fast)
-# Loading work.datapath(fast)
-# Loading work.flopr(fast)
-# Loading work.adder(fast)
-# Loading work.mux2(fast)
-# Loading work.regfile(fast)
-# Loading work.extend(fast)
-# Loading work.alu(fast)
-# Loading work.branchComp(fast)
-# Loading work.mux3(fast)
-# Loading work.imem(fast)
-# Loading work.dmem(fast)
-# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
-# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
-# ** Warning: (vsim-PLI-3407) Too many data words read on line 65 of file "../riscvtest/lab1_tests/srl.memfile". (Current address [64], address range [0:63])    : riscv_single.sv(44)
-#    Time: 0 ns  Iteration: 0  Instance: /testbench
-# Error attempted to pushdown all children on .main_pane.cs.117 mode is tabbed children are paneframes 1
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 23476
+#           Attempting to use alternate WLF file "./wlfty81vrt".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlfty81vrt

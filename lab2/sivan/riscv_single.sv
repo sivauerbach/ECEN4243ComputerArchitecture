@@ -40,7 +40,7 @@ module testbench();
   initial
     begin
       string memfilename;
-      memfilename = {"../riscvtest/lab1_tests/srl.memfile"};
+      memfilename = {"../riscvtest/mytest.memfile"};
       $readmemh(memfilename, dut.imem.RAM);
     end
 
@@ -79,7 +79,8 @@ module riscvsingle (input  logic        clk, reset,
       input  logic [31:0] ReadData);
   
   logic 				ALUSrc, RegWrite, JumpType, Zero, BranchYN;
-  logic [1:0] 				ResultSrc, ImmSrc;
+  logic [1:0] 				ResultSrc; 
+  logic [2:0]         ImmSrc;
   logic [3:0] 				ALUControl;
   
   controller c (Instr[6:0], Instr[14:12], Instr[30], Zero, BranchYN,
@@ -103,7 +104,7 @@ module controller (input  logic [6:0] op,
       output logic       MemWrite,
       output logic       PCSrc, ALUSrc,
       output logic       RegWrite, JumpType,
-      output logic [1:0] ImmSrc,
+      output logic [2:0] ImmSrc,
       output logic [3:0] ALUControl);
   
   logic [1:0] 			      ALUOp;
@@ -125,7 +126,7 @@ module maindec (input  logic [6:0] op,
   output logic 	   MemWrite,
   output logic 	   BranchType, ALUSrc,
   output logic 	   RegWrite, JumpType,
-  output logic [1:0] ImmSrc,
+  output logic [2:0] ImmSrc,
   output logic [1:0] ALUOp);
   
   logic [10:0] 		   controls;
@@ -136,12 +137,13 @@ module maindec (input  logic [6:0] op,
   always_comb
     case(op)
       // RegWrite_ImmSrc_ALUSrc_MemWrite_ResultSrc_Branch_ALUOp_Jump
-      7'b0000011: controls = 11'b1_00_1_0_01_0_00_0; // lw, lh, lb
-      7'b0100011: controls = 11'b0_01_1_1_00_0_00_0; // sw
-      7'b0110011: controls = 11'b1_xx_0_0_00_0_10_0; // R–type
-      7'b1100011: controls = 11'b0_10_0_0_00_1_01_0; // B-Type
-      7'b0010011: controls = 11'b1_00_1_0_00_0_10_0; // I–type ALU
-      7'b1101111: controls = 11'b1_11_0_0_10_0_00_1; // jal
+      7'b0000011: controls = 11'b1_000_1_0_01_0_00_0; // lw, lh, lb
+      7'b0110111: controls = 11'b1_100_1_0_00_0_10_0; //lui in ALU
+      7'b0100011: controls = 11'b0_001_1_1_00_0_00_0; // sw
+      7'b0110011: controls = 11'b1_xxx_0_0_00_0_10_0; // R–type
+      7'b1100011: controls = 11'b0_010_0_0_00_1_01_0; // B-Type
+      7'b0010011: controls = 11'b1_000_1_0_00_0_10_0; // I–type ALU
+      7'b1101111: controls = 11'b1_011_0_0_10_0_00_1; // jal
       //7'b1100111: controls = 11'b1_11_0_0_10_0_00_1; // jalr
       
       default: controls = 11'bx_xx_x_x_xx_x_xx_x; // ???
@@ -164,25 +166,31 @@ module aludec (
   
   logic 			  RtypeSub;
   
-  assign SubSRA = ()funct7b5 & opb5; // TRUE for R–type subtract, sra
+  //assign SubSRA = funct7b5 & opb5; // TRUE for R–type subtract, sra
   always_comb
-    case(ALUOp)
-      2'b00: ALUControl = 4'b0000; // addition
-      2'b01: ALUControl = 4'b0001; // subtraction
-      default: case(funct3) // R–type or I–type ALU
-                3'b000: if (RtypeSub)
-                          ALUControl = 4'b0001; // sub
-                        else
-                          ALUControl = 4'b0000; // add, addi
-                3'b001: ALUControl = 4'b0110; //sll, slli
-                3'b010: ALUControl = 4'b0101; // slt, slti
-                3'b100: ALUControl = 4'b0100; // xor, xori
-                3'b101: ALUControl = 4'b0111; //srl srli
-                3'b110: ALUControl = 4'b0011; // or, ori
-                3'b111: ALUControl = 4'b0010; // and, andi  
-                default: ALUControl = 4'b0xxx; // ???
-              endcase // case (funct3)       
-    endcase // case (ALUOp)
+    
+    
+    case(op)
+      7'b0110111: ALUControl = 4'b1111; //LUI
+      default: case(ALUOp)
+        2'b00: ALUControl = 4'b0000; // addition
+        2'b01: ALUControl = 4'b0001; // subtraction
+        default: case(funct3) // R–type or I–type ALU
+                  3'b000: if (RtypeSub)
+                            ALUControl = 4'b0001; // sub
+                          else
+                            ALUControl = 4'b0000; // add, addi
+                  3'b001: ALUControl = 4'b0110; //sll, slli
+                  3'b010: ALUControl = 4'b0101; // slt, slti
+                  3'b100: ALUControl = 4'b0100; // xor, xori
+                  3'b101: ALUControl = 4'b0111; //srl srli
+                  3'b110: ALUControl = 4'b0011; // or, ori
+                  3'b111: ALUControl = 4'b0010; // and, andi  
+                  default: ALUControl = 4'bxxxx; // ???
+                endcase // case (funct3)       
+      endcase // case (ALUOp)
+    endcase
+    
   
 endmodule // aludec
 
@@ -190,8 +198,8 @@ module datapath (input  logic        clk, reset,
     input  logic [1:0]  ResultSrc,
     input  logic 	     PCSrc, ALUSrc,
     input  logic 	     RegWrite,
-    input  logic [1:0]  ImmSrc,
-    input  logic [2:0]  ALUControl,
+    input  logic [2:0]  ImmSrc,
+    input  logic [3:0]  ALUControl,
     input  logic [2:0]  func3, //new
     output logic 	      Zero,
     output logic 	      BranchYN,
@@ -213,11 +221,11 @@ module datapath (input  logic        clk, reset,
   // register file logic
   regfile  rf (clk, RegWrite, Instr[19:15], Instr[24:20],
         Instr[11:7], Result, SrcA, WriteData);
-  extend  ext (Instr[31:7], ImmSrc, ImmExt);
+  extend  ext (Instr[31:7], ImmSrc, ImmExt); //***
   // ALU logic
-  mux2 #(32)  srcbmux (WriteData, ImmExt, ALUSrc, SrcB);
+  mux2 #(32)  srcbmux (WriteData, ImmExt, ALUSrc, SrcB); //**** ALU src = same as for other i tyers (SrcB=Imm)
   alu  alu (SrcA, SrcB, ALUControl, func3, ALUResult, Zero, BranchYN);
-  mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4,ResultSrc, Result);
+  mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4, ResultSrc, Result); //in coltroller: resultSrc = ALU result for i types
 
 endmodule // datapath
 
@@ -229,20 +237,22 @@ module adder (input  logic [31:0] a, b,
 endmodule
 
 module extend (input  logic [31:7] instr,
-                input  logic [1:0]  immsrc,
+                input  logic [2:0]  immsrc,
                 output logic [31:0] immext);
   
   always_comb
     case(immsrc)
       // I−type
-      2'b00:  immext = {{20{instr[31]}}, instr[31:20]};
+      3'b000:  immext = {{20{instr[31]}}, instr[31:20]};
       // S−type (stores)
-      2'b01:  immext = {{20{instr[31]}}, instr[31:25], instr[11:7]};
+      3'b001:  immext = {{20{instr[31]}}, instr[31:25], instr[11:7]};
       // B−type (branches)
-      2'b10:  immext = {{20{instr[31]}}, instr[7], instr[30:25], instr[11:8], 1'b0};       
+      3'b010:  immext = {{20{instr[31]}}, instr[7], instr[30:25], instr[11:8], 1'b0};       
       // J−type (jal)
-      2'b11:  immext = {{12{instr[31]}}, instr[19:12], instr[20], instr[30:21], 1'b0};
-      default: immext = 32'bx; // undefined
+      3'b011:  immext = {{12{instr[31]}}, instr[19:12], instr[20], instr[30:21], 1'b0};
+      // LUI **
+      3'b100: immext = {{20{instr[31]}}, instr[31:12]};
+      default: immext = 32'bx; // undefined (in colroller set immSrc= 3'b100) **
     endcase // case (immsrc)
   
 endmodule // extend
@@ -350,6 +360,7 @@ module alu (input  logic [31:0] a, b,
       4'b0101:  ALUResult = sum[31] ^ v; // slt, slti  
       4'b0110:  ALUResult = a << b[4:0];      //sll, slli
       4'b0111:  ALUResult = a >> b[4:0];      //srl
+      4'b1111:  ALUResult = b << 12; //LUI
       default: ALUResult = 32'bx;
     endcase
 
