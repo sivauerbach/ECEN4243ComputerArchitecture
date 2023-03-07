@@ -164,6 +164,7 @@ module aludec (input  logic       opb5,
                           ALUControl = 3'b000; // add, addi
                 3'b001: ALUControl = 3'b110; //sll, slli
                 3'b010: ALUControl = 3'b101; // slt, slti
+                3'b011: ALUControl = 3'b101; //sltu 
                 3'b100: ALUControl = 3'b100; // xor, xori
                 3'b101: ALUControl = 3'b111; //srl srli
                 3'b110: ALUControl = 3'b011; // or, ori
