@@ -40,7 +40,7 @@ module testbench();
   initial
     begin
       string memfilename;
-      memfilename = {"../riscvtest/lab1_tests/srl.memfile"};
+      memfilename = {"../riscvtest/lab1_tests/sltiu.memfile"};
       $readmemh(memfilename, dut.imem.RAM);
     end
 
@@ -162,22 +162,28 @@ module aludec (
         input  logic [1:0] ALUOp,
         output logic [3:0] ALUControl);
   
-  logic 			  RtypeSub;
+  logic 			  SubSra;
   
-  assign SubSRA = ()funct7b5 & opb5; // TRUE for R–type subtract, sra
+  // TRUE for SUB, SRA, SRAI
+  assign SubSra = (((op == 7'b0010011) | (op == 7'b0110011)) 
+                                  & funct7b5) ? 1'b1 : 1'bx; 
   always_comb
     case(ALUOp)
       2'b00: ALUControl = 4'b0000; // addition
       2'b01: ALUControl = 4'b0001; // subtraction
       default: case(funct3) // R–type or I–type ALU
-                3'b000: if (RtypeSub)
+                3'b000: if (SubSra)
                           ALUControl = 4'b0001; // sub
                         else
                           ALUControl = 4'b0000; // add, addi
                 3'b001: ALUControl = 4'b0110; //sll, slli
                 3'b010: ALUControl = 4'b0101; // slt, slti
+                3'b011: ALUControl = 4'b1101;  //sltu, sltiu
                 3'b100: ALUControl = 4'b0100; // xor, xori
-                3'b101: ALUControl = 4'b0111; //srl srli
+                3'b101: if (SubSra)
+                          ALUControl = 4'b1111; //sra, srai
+                        else
+                          ALUControl = 4'b0111; //srl srli
                 3'b110: ALUControl = 4'b0011; // or, ori
                 3'b111: ALUControl = 4'b0010; // and, andi  
                 default: ALUControl = 4'b0xxx; // ???
@@ -191,7 +197,7 @@ module datapath (input  logic        clk, reset,
     input  logic 	     PCSrc, ALUSrc,
     input  logic 	     RegWrite,
     input  logic [1:0]  ImmSrc,
-    input  logic [2:0]  ALUControl,
+    input  logic [3:0]  ALUControl,
     input  logic [2:0]  func3, //new
     output logic 	      Zero,
     output logic 	      BranchYN,
@@ -323,7 +329,7 @@ module dmem (input  logic        clk, we,
 endmodule // dmem
 
 module alu (input  logic [31:0] a, b,
-            input  logic [2:0] 	alucontrol,
+            input  logic [3:0] 	alucontrol,
             input  logic [2:0]  func3,
             output logic [31:0] ALUResult,
             output logic 	zero,
@@ -347,9 +353,12 @@ module alu (input  logic [31:0] a, b,
       4'b0010:  ALUResult = a & b;       // and, andi
       4'b0011:  ALUResult = a | b;       // or, ori
       4'b0100:  ALUResult = a ^ b;       // xor, xori
-      4'b0101:  ALUResult = sum[31] ^ v; // slt, slti  
+      4'b0101:  ALUResult = sum[31] ^ v; // slt, slti
+//      4'b1101:  ALUResult = ($unsigned(a) < $unsigned(b)) ? 32'b1 : 0;     // sltu, sltiu  
+      4'b1101:  ALUResult = { {30{1'b0}}, ~c };     // sltu, sltiu  
       4'b0110:  ALUResult = a << b[4:0];      //sll, slli
       4'b0111:  ALUResult = a >> b[4:0];      //srl
+      4'b1111:  ALUResult = a >>> b[4:0];     // sra, srai
       default: ALUResult = 32'bx;
     endcase
 
