@@ -42,10 +42,10 @@ module testbench();
       string memfilename;
       
       /*Lab 1 test files: */
-      //memfilename = {"../riscvtest/lab1_tests/sltiu.memfile"};
+      memfilename = {"../riscvtest/lab1_tests/lb.memfile"};
       
       /* Main test file */
-      memfilename = {"../riscvtest/riscvtest.memfile"};
+      //memfilename = {"../riscvtest/riscvtest.memfile"};
       $readmemh(memfilename, dut.imem.RAM);
     end
 
@@ -232,7 +232,7 @@ module datapath (input  logic        clk, reset,
   // ALU logic
   mux2 #(32)  srcbmux (WriteData, ImmExt, ALUSrc, SrcB);
   alu  alu (SrcA, SrcB, ALUControl, funct3, ALUResult, Zero, BranchYN);
-  mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4, ResultSrc, Result);
+  mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4, ResultSrc, Result); //if modreadDat is correct, change ReadData to ModReadData
 
 endmodule // datapath
 
@@ -426,7 +426,7 @@ module LoadDec( input logic [31:0] ReadData,
     case (funct3)
       3'b000:  ModReadData = {{24{ReadData[7]}}, ReadData[7:0]};    // lb
       3'b001:  ModReadData = {{16{ReadData[15]}}, ReadData[15:0]};  // lh
-      3'b010:  ModReadData = ReadData;                         // lw
+      3'b010:  ModReadData = ReadData;                               // lw
       3'b100:  ModReadData = {{24{1'b0}}, ReadData[7:0]};           // lbu
       3'b101:  ModReadData = {{16{1'b0}}, ReadData[15:0]};          // lhu
       default: ModReadData = 32'bx;
