@@ -1,4 +1,4 @@
-# //  ModelSim SE-64 2021.3 Jul 13 2021
+# //  ModelSim SE-64 2021.2 Apr 14 2021
 # //
 # //  Copyright 1991-2021 Mentor Graphics Corporation
 # //  All Rights Reserved.
@@ -11,12 +11,13 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-# do {.\riscv_single.do}
+# do ./riscv_single.do
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is jacks@DESKTOP-K531KCD.
 # ** Warning: (vlib-34) Library already exists at "work".
 # Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 10:51:43 on Mar 20,2023
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 18:16:06 on Mar 20,2023
 # vlog -reportprogress 300 riscv_single.sv 
 # -- Compiling module testbench
 # -- Compiling module riscvsingle
@@ -36,17 +37,18 @@
 # -- Compiling module alu
 # -- Compiling module regfile
 # -- Compiling module branchComp
+# -- Compiling module LoadDec
 # 
 # Top level modules:
 # 	testbench
 # 	flopenr
-# End time: 10:51:43 on Mar 20,2023, Elapsed time: 0:00:00
+# End time: 18:16:06 on Mar 20,2023, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 10:51:44 on Mar 20,2023
+# Start time: 18:16:06 on Mar 20,2023
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Note: (vsim-8611) Generating debug db.
-# ** Note: (vopt-4301) Memory core inferred for signal 'RAM' width=32, depth=256, type=RAM at location riscv_single.sv:337
+# ** Note: (vopt-4301) Memory core inferred for signal 'RAM' width=32, depth=256, type=RAM at location riscv_single.sv:344
 # Loading sv_std.std
 # Loading work.testbench(fast)
 # Loading work.top(fast)
@@ -60,6 +62,7 @@
 # Loading work.mux2(fast)
 # Loading work.regfile(fast)
 # Loading work.extend(fast)
+# Loading work.LoadDec(fast)
 # Loading work.alu(fast)
 # Loading work.branchComp(fast)
 # Loading work.mux3(fast)
@@ -69,19 +72,26 @@
 # ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 23476
-#           Attempting to use alternate WLF file "./wlftqz1nqb".
+#           Attempting to use alternate WLF file "./wlfty4nhqn".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftqz1nqb
-do {.\riscv_single.do}
+#           Using alternate file: ./wlfty4nhqn
+# Simulation succeeded
+# ** Note: $stop    : riscv_single.sv(69)
+#    Time: 195 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at riscv_single.sv line 69
+q
+
+do ./riscv_single.do
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is jacks@DESKTOP-K531KCD.
-# Error 31: Unable to unlink file "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt1/__mti.dbg".
-# Error 133: Unable to remove directory "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt1".
-# Error 133: Unable to remove directory "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is Sivan@VANSY-SHLEMUTY.
+# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
 # ** Warning: (vlib-34) Library already exists at "work".
 # Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 10:57:56 on Mar 20,2023
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 18:26:19 on Mar 20,2023
 # vlog -reportprogress 300 riscv_single.sv 
 # -- Compiling module testbench
 # -- Compiling module riscvsingle
@@ -101,16 +111,17 @@ do {.\riscv_single.do}
 # -- Compiling module alu
 # -- Compiling module regfile
 # -- Compiling module branchComp
+# -- Compiling module LoadDec
 # 
 # Top level modules:
 # 	testbench
 # 	flopenr
-# End time: 10:57:56 on Mar 20,2023, Elapsed time: 0:00:00
+# End time: 18:26:19 on Mar 20,2023, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# End time: 10:58:00 on Mar 20,2023, Elapsed time: 0:06:16
+# End time: 18:26:30 on Mar 20,2023, Elapsed time: 0:10:24
 # Errors: 1, Warnings: 2
 # vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 10:58:00 on Mar 20,2023
+# Start time: 18:26:30 on Mar 20,2023
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Note: (vsim-8611) Generating debug db.
 # Loading sv_std.std
@@ -126,6 +137,7 @@ do {.\riscv_single.do}
 # Loading work.mux2(fast)
 # Loading work.regfile(fast)
 # Loading work.extend(fast)
+# Loading work.LoadDec(fast)
 # Loading work.alu(fast)
 # Loading work.branchComp(fast)
 # Loading work.mux3(fast)
@@ -135,19 +147,24 @@ do {.\riscv_single.do}
 # ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 23476
-#           Attempting to use alternate WLF file "./wlftixavdc".
+#           Attempting to use alternate WLF file "./wlfterczeq".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftixavdc
-do {.\riscv_single.do}
+#           Using alternate file: ./wlfterczeq
+# Simulation succeeded
+# ** Note: $stop    : riscv_single.sv(69)
+#    Time: 195 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at riscv_single.sv line 69
+do ./riscv_single.do
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is jacks@DESKTOP-K531KCD.
-# Error 31: Unable to unlink file "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt1/__mti.dbg".
-# Error 133: Unable to remove directory "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt1".
-# Error 133: Unable to remove directory "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is Sivan@VANSY-SHLEMUTY.
+# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
 # ** Warning: (vlib-34) Library already exists at "work".
 # Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 11:00:22 on Mar 20,2023
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 18:45:19 on Mar 20,2023
 # vlog -reportprogress 300 riscv_single.sv 
 # -- Compiling module testbench
 # -- Compiling module riscvsingle
@@ -167,17 +184,18 @@ do {.\riscv_single.do}
 # -- Compiling module alu
 # -- Compiling module regfile
 # -- Compiling module branchComp
+# -- Compiling module LoadDec
 # 
 # Top level modules:
 # 	testbench
 # 	flopenr
-# End time: 11:00:22 on Mar 20,2023, Elapsed time: 0:00:00
+# End time: 18:45:19 on Mar 20,2023, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# End time: 11:00:25 on Mar 20,2023, Elapsed time: 0:02:25
+# End time: 18:45:20 on Mar 20,2023, Elapsed time: 0:18:50
 # Errors: 1, Warnings: 2
 # vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 11:00:25 on Mar 20,2023
-# ** Note: (vsim-8009) Loading existing optimized design _opt1
+# Start time: 18:45:20 on Mar 20,2023
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
 # Loading sv_std.std
 # Loading work.testbench(fast)
 # Loading work.top(fast)
@@ -191,6 +209,7 @@ do {.\riscv_single.do}
 # Loading work.mux2(fast)
 # Loading work.regfile(fast)
 # Loading work.extend(fast)
+# Loading work.LoadDec(fast)
 # Loading work.alu(fast)
 # Loading work.branchComp(fast)
 # Loading work.mux3(fast)
@@ -200,19 +219,24 @@ do {.\riscv_single.do}
 # ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 23476
-#           Attempting to use alternate WLF file "./wlft43nkv1".
+#           Attempting to use alternate WLF file "./wlftm7n1zq".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft43nkv1
-do {.\riscv_single.do}
+#           Using alternate file: ./wlftm7n1zq
+# Simulation failed
+# ** Note: $stop    : riscv_single.sv(73)
+#    Time: 215 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at riscv_single.sv line 73
+do ./riscv_single.do
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
 # ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is jacks@DESKTOP-K531KCD.
-# Error 31: Unable to unlink file "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt1/__mti.dbg".
-# Error 133: Unable to remove directory "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt1".
-# Error 133: Unable to remove directory "C:/Users/jacks/OneDrive/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is Sivan@VANSY-SHLEMUTY.
+# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
 # ** Warning: (vlib-34) Library already exists at "work".
 # Errors: 0, Warnings: 1
-# Model Technology ModelSim SE-64 vlog 2021.3 Compiler 2021.07 Jul 13 2021
-# Start time: 11:02:25 on Mar 20,2023
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 18:50:43 on Mar 20,2023
 # vlog -reportprogress 300 riscv_single.sv 
 # -- Compiling module testbench
 # -- Compiling module riscvsingle
@@ -232,16 +256,377 @@ do {.\riscv_single.do}
 # -- Compiling module alu
 # -- Compiling module regfile
 # -- Compiling module branchComp
+# -- Compiling module LoadDec
 # 
 # Top level modules:
 # 	testbench
 # 	flopenr
-# End time: 11:02:25 on Mar 20,2023, Elapsed time: 0:00:00
+# End time: 18:50:43 on Mar 20,2023, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# End time: 11:02:27 on Mar 20,2023, Elapsed time: 0:02:02
+# End time: 18:50:44 on Mar 20,2023, Elapsed time: 0:05:24
 # Errors: 1, Warnings: 2
 # vsim -debugdb -voptargs="+acc" work.testbench 
-# Start time: 11:02:27 on Mar 20,2023
+# Start time: 18:50:44 on Mar 20,2023
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# Loading sv_std.std
+# Loading work.testbench(fast)
+# Loading work.top(fast)
+# Loading work.riscvsingle(fast)
+# Loading work.controller(fast)
+# Loading work.maindec(fast)
+# Loading work.aludec(fast)
+# Loading work.datapath(fast)
+# Loading work.flopr(fast)
+# Loading work.adder(fast)
+# Loading work.mux2(fast)
+# Loading work.regfile(fast)
+# Loading work.extend(fast)
+# Loading work.LoadDec(fast)
+# Loading work.alu(fast)
+# Loading work.branchComp(fast)
+# Loading work.mux3(fast)
+# Loading work.imem(fast)
+# Loading work.dmem(fast)
+# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
+# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 23476
+#           Attempting to use alternate WLF file "./wlft0wekn1".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft0wekn1
+# Simulation failed
+# ** Note: $stop    : riscv_single.sv(73)
+#    Time: 215 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at riscv_single.sv line 73
+do ./riscv_single.do
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is jacks@DESKTOP-K531KCD.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is Sivan@VANSY-SHLEMUTY.
+# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 18:51:54 on Mar 20,2023
+# vlog -reportprogress 300 riscv_single.sv 
+# -- Compiling module testbench
+# -- Compiling module riscvsingle
+# -- Compiling module controller
+# -- Compiling module maindec
+# -- Compiling module aludec
+# -- Compiling module datapath
+# -- Compiling module adder
+# -- Compiling module extend
+# -- Compiling module flopr
+# -- Compiling module flopenr
+# -- Compiling module mux2
+# -- Compiling module mux3
+# -- Compiling module top
+# -- Compiling module imem
+# -- Compiling module dmem
+# -- Compiling module alu
+# -- Compiling module regfile
+# -- Compiling module branchComp
+# -- Compiling module LoadDec
+# 
+# Top level modules:
+# 	testbench
+# 	flopenr
+# End time: 18:51:54 on Mar 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 18:51:55 on Mar 20,2023, Elapsed time: 0:01:11
+# Errors: 1, Warnings: 2
+# vsim -debugdb -voptargs="+acc" work.testbench 
+# Start time: 18:51:55 on Mar 20,2023
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# Loading sv_std.std
+# Loading work.testbench(fast)
+# Loading work.top(fast)
+# Loading work.riscvsingle(fast)
+# Loading work.controller(fast)
+# Loading work.maindec(fast)
+# Loading work.aludec(fast)
+# Loading work.datapath(fast)
+# Loading work.flopr(fast)
+# Loading work.adder(fast)
+# Loading work.mux2(fast)
+# Loading work.regfile(fast)
+# Loading work.extend(fast)
+# Loading work.LoadDec(fast)
+# Loading work.alu(fast)
+# Loading work.branchComp(fast)
+# Loading work.mux3(fast)
+# Loading work.imem(fast)
+# Loading work.dmem(fast)
+# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
+# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 23476
+#           Attempting to use alternate WLF file "./wlft4rzf1d".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft4rzf1d
+# Simulation failed
+# ** Note: $stop    : riscv_single.sv(73)
+#    Time: 215 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at riscv_single.sv line 73
+do ./riscv_single.do
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is jacks@DESKTOP-K531KCD.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is Sivan@VANSY-SHLEMUTY.
+# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 18:57:15 on Mar 20,2023
+# vlog -reportprogress 300 riscv_single.sv 
+# -- Compiling module testbench
+# -- Compiling module riscvsingle
+# -- Compiling module controller
+# -- Compiling module maindec
+# -- Compiling module aludec
+# -- Compiling module datapath
+# -- Compiling module adder
+# -- Compiling module extend
+# -- Compiling module flopr
+# -- Compiling module flopenr
+# -- Compiling module mux2
+# -- Compiling module mux3
+# -- Compiling module top
+# -- Compiling module imem
+# -- Compiling module dmem
+# -- Compiling module alu
+# -- Compiling module regfile
+# -- Compiling module branchComp
+# -- Compiling module LoadDec
+# 
+# Top level modules:
+# 	testbench
+# 	flopenr
+# End time: 18:57:15 on Mar 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 18:57:16 on Mar 20,2023, Elapsed time: 0:05:21
+# Errors: 1, Warnings: 2
+# vsim -debugdb -voptargs="+acc" work.testbench 
+# Start time: 18:57:16 on Mar 20,2023
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# Loading sv_std.std
+# Loading work.testbench(fast)
+# Loading work.top(fast)
+# Loading work.riscvsingle(fast)
+# Loading work.controller(fast)
+# Loading work.maindec(fast)
+# Loading work.aludec(fast)
+# Loading work.datapath(fast)
+# Loading work.flopr(fast)
+# Loading work.adder(fast)
+# Loading work.mux2(fast)
+# Loading work.regfile(fast)
+# Loading work.extend(fast)
+# Loading work.LoadDec(fast)
+# Loading work.alu(fast)
+# Loading work.branchComp(fast)
+# Loading work.mux3(fast)
+# Loading work.imem(fast)
+# Loading work.dmem(fast)
+# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
+# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 23476
+#           Attempting to use alternate WLF file "./wlftxztg4e".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftxztg4e
+# Simulation failed
+# ** Note: $stop    : riscv_single.sv(73)
+#    Time: 215 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at riscv_single.sv line 73
+do ./riscv_single.do
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is jacks@DESKTOP-K531KCD.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is Sivan@VANSY-SHLEMUTY.
+# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 18:58:32 on Mar 20,2023
+# vlog -reportprogress 300 riscv_single.sv 
+# -- Compiling module testbench
+# -- Compiling module riscvsingle
+# -- Compiling module controller
+# -- Compiling module maindec
+# -- Compiling module aludec
+# -- Compiling module datapath
+# -- Compiling module adder
+# -- Compiling module extend
+# -- Compiling module flopr
+# -- Compiling module flopenr
+# -- Compiling module mux2
+# -- Compiling module mux3
+# -- Compiling module top
+# -- Compiling module imem
+# -- Compiling module dmem
+# -- Compiling module alu
+# -- Compiling module regfile
+# -- Compiling module branchComp
+# -- Compiling module LoadDec
+# 
+# Top level modules:
+# 	testbench
+# 	flopenr
+# End time: 18:58:32 on Mar 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 18:58:33 on Mar 20,2023, Elapsed time: 0:01:17
+# Errors: 1, Warnings: 2
+# vsim -debugdb -voptargs="+acc" work.testbench 
+# Start time: 18:58:33 on Mar 20,2023
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# Loading sv_std.std
+# Loading work.testbench(fast)
+# Loading work.top(fast)
+# Loading work.riscvsingle(fast)
+# Loading work.controller(fast)
+# Loading work.maindec(fast)
+# Loading work.aludec(fast)
+# Loading work.datapath(fast)
+# Loading work.flopr(fast)
+# Loading work.adder(fast)
+# Loading work.mux2(fast)
+# Loading work.regfile(fast)
+# Loading work.extend(fast)
+# Loading work.LoadDec(fast)
+# Loading work.alu(fast)
+# Loading work.branchComp(fast)
+# Loading work.mux3(fast)
+# Loading work.imem(fast)
+# Loading work.dmem(fast)
+# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
+# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 23476
+#           Attempting to use alternate WLF file "./wlftwwr5z9".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftwwr5z9
+# Simulation failed
+# ** Note: $stop    : riscv_single.sv(73)
+#    Time: 215 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at riscv_single.sv line 73
+do ./riscv_single.do
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is jacks@DESKTOP-K531KCD.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is Sivan@VANSY-SHLEMUTY.
+# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 19:04:53 on Mar 20,2023
+# vlog -reportprogress 300 riscv_single.sv 
+# -- Compiling module testbench
+# -- Compiling module riscvsingle
+# -- Compiling module controller
+# -- Compiling module maindec
+# -- Compiling module aludec
+# -- Compiling module datapath
+# -- Compiling module adder
+# -- Compiling module extend
+# -- Compiling module flopr
+# -- Compiling module flopenr
+# -- Compiling module mux2
+# -- Compiling module mux3
+# -- Compiling module top
+# -- Compiling module imem
+# -- Compiling module dmem
+# -- Compiling module alu
+# -- Compiling module regfile
+# -- Compiling module branchComp
+# -- Compiling module LoadDec
+# 
+# Top level modules:
+# 	testbench
+# 	flopenr
+# End time: 19:04:53 on Mar 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 19:04:54 on Mar 20,2023, Elapsed time: 0:06:21
+# Errors: 1, Warnings: 2
+# vsim -debugdb -voptargs="+acc" work.testbench 
+# Start time: 19:04:54 on Mar 20,2023
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# Loading sv_std.std
+# Loading work.testbench(fast)
+# Loading work.top(fast)
+# Loading work.riscvsingle(fast)
+# Loading work.controller(fast)
+# Loading work.maindec(fast)
+# Loading work.aludec(fast)
+# Loading work.datapath(fast)
+# Loading work.flopr(fast)
+# Loading work.adder(fast)
+# Loading work.mux2(fast)
+# Loading work.regfile(fast)
+# Loading work.extend(fast)
+# Loading work.LoadDec(fast)
+# Loading work.alu(fast)
+# Loading work.branchComp(fast)
+# Loading work.mux3(fast)
+# Loading work.imem(fast)
+# Loading work.dmem(fast)
+# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
+# ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 23476
+#           Attempting to use alternate WLF file "./wlft23wsi7".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft23wsi7
+# Simulation failed
+# ** Note: $stop    : riscv_single.sv(73)
+#    Time: 255 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at riscv_single.sv line 73
+do ./riscv_single.do
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Sivan@VANSY-SHLEMUTY.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is jacks@DESKTOP-K531KCD.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt2".  Locker is Sivan@VANSY-SHLEMUTY.
+# Error 31: Unable to unlink file "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2/__mti.dbg".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer/#64_opt2".
+# Error 133: Unable to remove directory "C:/Users/Sivan/OneDrive - Oklahoma A and M System/Documents/GitHub/ECEN4243ComputerArchitecture/lab2/sivan/work/_dbcontainer".
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim SE-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+# Start time: 19:06:13 on Mar 20,2023
+# vlog -reportprogress 300 riscv_single.sv 
+# -- Compiling module testbench
+# -- Compiling module riscvsingle
+# -- Compiling module controller
+# -- Compiling module maindec
+# -- Compiling module aludec
+# -- Compiling module datapath
+# -- Compiling module adder
+# -- Compiling module extend
+# -- Compiling module flopr
+# -- Compiling module flopenr
+# -- Compiling module mux2
+# -- Compiling module mux3
+# -- Compiling module top
+# -- Compiling module imem
+# -- Compiling module dmem
+# -- Compiling module alu
+# -- Compiling module regfile
+# -- Compiling module branchComp
+# -- Compiling module LoadDec
+# 
+# Top level modules:
+# 	testbench
+# 	flopenr
+# End time: 19:06:13 on Mar 20,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 19:06:18 on Mar 20,2023, Elapsed time: 0:01:24
+# Errors: 1, Warnings: 2
+# vsim -debugdb -voptargs="+acc" work.testbench 
+# Start time: 19:06:18 on Mar 20,2023
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Note: (vsim-8611) Generating debug db.
 # Loading sv_std.std
@@ -257,6 +642,7 @@ do {.\riscv_single.do}
 # Loading work.mux2(fast)
 # Loading work.regfile(fast)
 # Loading work.extend(fast)
+# Loading work.LoadDec(fast)
 # Loading work.alu(fast)
 # Loading work.branchComp(fast)
 # Loading work.mux3(fast)
@@ -266,6 +652,10 @@ do {.\riscv_single.do}
 # ** Error: (vsim-8357) Internal debugDB error id:ct1  ret:1 table context_tbl already exists
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: Sivan  Hostname: VANSY-SHLEMUTY  ProcessID: 23476
-#           Attempting to use alternate WLF file "./wlftnx9mv5".
+#           Attempting to use alternate WLF file "./wlft0824g4".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftnx9mv5
+#           Using alternate file: ./wlft0824g4
+# Simulation failed
+# ** Note: $stop    : riscv_single.sv(73)
+#    Time: 255 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at riscv_single.sv line 73

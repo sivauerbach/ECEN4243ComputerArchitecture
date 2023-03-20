@@ -42,10 +42,10 @@ module testbench();
       string memfilename;
       
       /*Lab 1 test files: */
-      memfilename = {"../riscvtest/lab1_tests/lb.memfile"};
+      //memfilename = {"../riscvtest/lab1_tests/lb.memfile"};
       
       /* Main test file */
-      //memfilename = {"../riscvtest/riscvtest.memfile"};
+      memfilename = {"../riscvtest/mytest.memfile"};
       $readmemh(memfilename, dut.imem.RAM);
     end
 
@@ -238,7 +238,7 @@ module datapath (input  logic        clk, reset,
   // ALU logic
   mux2 #(32)  srcbmux (WriteData, ImmExt, ALUSrc, SrcB);
   alu  alu (SrcA, SrcB, ALUControl, funct3, PC, ALUResult, Zero, BranchYN);
-  mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4, ResultSrc, Result); //if modreadDat is correct, change ReadData to ModReadData
+  mux3 #(32) resultmux (ALUResult, ModReadData, PCPlus4, ResultSrc, Result); //if modreadDat is correct, change ReadData to ModReadData
 
 endmodule // datapath
 
