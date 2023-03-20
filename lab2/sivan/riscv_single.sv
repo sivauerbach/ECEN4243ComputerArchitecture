@@ -40,7 +40,7 @@ module testbench();
   initial
     begin
       string memfilename;
-      memfilename = {"../riscvtest/lab1_tests/lui.memfile"};
+      memfilename = {"../riscvtest/lab1_tests/auipc.memfile"};
       $readmemh(memfilename, dut.imem.RAM);
     end
 
@@ -144,6 +144,7 @@ module maindec (input  logic [6:0] op,
       7'b1100011: controls = 12'b0_010_0_0_00_1_01_0; // B-Type
       7'b0010011: controls = 12'b1_000_1_0_00_0_10_0; // I–type ALU
       7'b1101111: controls = 12'b1_011_0_0_10_0_00_1; // jal
+      7'b0010111: controls = 12'b1_100_1_0_00_0_10_0; //auipc
       //7'b1100111: controls = 12'b1_11_0_0_10_0_00_1; // jalr
       
       default: controls = 12'bx_xxx_x_x_xx_x_xx_x; // ???
@@ -177,6 +178,7 @@ module aludec (
     
     case(op)
       7'b0110111: ALUControl = 4'b1110; //LUI
+      7'b0010111: ALUControl = 4'b1001; //AUIPC
       default: case(ALUOp)
         2'b00: ALUControl = 4'b0000; // addition
         2'b01: ALUControl = 4'b0001; // subtraction
@@ -232,7 +234,7 @@ module datapath (input  logic        clk, reset,
   extend  ext (Instr[31:7], ImmSrc, ImmExt); //***
   // ALU logic
   mux2 #(32)  srcbmux (WriteData, ImmExt, ALUSrc, SrcB); //**** ALU src = same as for other i tyers (SrcB=Imm)
-  alu  alu (SrcA, SrcB, ALUControl, func3, ALUResult, Zero, BranchYN);
+  alu  alu (SrcA, SrcB, ALUControl, func3, PC, ALUResult, Zero, BranchYN);
   mux3 #(32) resultmux (ALUResult, ReadData, PCPlus4, ResultSrc, Result); //in coltroller: resultSrc = ALU result for i types
 
 endmodule // datapath
@@ -343,6 +345,7 @@ endmodule // dmem
 module alu (input  logic [31:0] a, b,
             input  logic [3:0] 	alucontrol,
             input  logic [2:0]  func3,
+            input logic [31:0] PC,
             output logic [31:0] ALUResult,
             output logic 	zero,
             output logic BranchYN);
@@ -368,7 +371,9 @@ module alu (input  logic [31:0] a, b,
       4'b0101:  ALUResult = sum[31] ^ v; // slt, slti  
       4'b0110:  ALUResult = a << b[4:0];      //sll, slli
       4'b0111:  ALUResult = a >> b[4:0];      //srl
-      4'b1110:  ALUResult = b << 12; //LUI
+      4'b1110:  ALUResult = b << 12;          //LUI
+      4'b1111:  ALUResult = a >>> b[4:0];     // sra, srai
+      4'b1001: ALUResult = PC + (b << 12);            //AUIPC
       default: ALUResult = 32'bx;
     endcase
 
@@ -415,3 +420,4 @@ module branchComp (input [31:0] a,
 
 endmodule
 
+//module target (input [])
