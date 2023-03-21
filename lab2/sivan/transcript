@@ -1771,3 +1771,6 @@ do ./riscv_single.do
 #           Attempting to use alternate WLF file "./wlftwcbk0t".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
 #           Using alternate file: ./wlftwcbk0t
+q
+# End time: 01:30:18 on Mar 21,2023, Elapsed time: 0:03:47
+# Errors: 1, Warnings: 2
