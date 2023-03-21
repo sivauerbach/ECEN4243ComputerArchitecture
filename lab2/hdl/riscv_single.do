@@ -67,6 +67,7 @@ add wave -hex /testbench/dut/rv32single/dp/rf/*
 add wave -hex /testbench/dut/rv32single/dp/rf/rf
 
 
+
 -- Set Wave Output Items 
 TreeUpdate [SetDefaultTree]
 WaveRestoreZoom {0 ps} {200 ns}
@@ -80,10 +81,10 @@ configure wave -rowmargin 4
 configure wave -childrowmargin 2
 
 -- Run the Simulation
-run 300 ns
+run 600 ns
 
 -- Add schematic
-add schematic -full sim:/testbench/dut/rv32single
+# add schematic -full sim:/testbench/dut/rv32single
 
 -- Save memory for checking (if needed)
 # mem save -outfile memory.dat -wordsperline 1 /testbench/dut/dmem/RAM
