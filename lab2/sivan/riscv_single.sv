@@ -42,10 +42,10 @@ module testbench();
       string memfilename;
       
       /*Lab 1 test files: */
-      //memfilename = {"../riscvtest/lab1_tests/sw.memfile"};
+      memfilename = {"../riscvtest/lab1_tests/sb.memfile"};
       
       /* Main test file */
-      memfilename = {"../riscvtest/mytest.memfile"};
+      //memfilename = {"../riscvtest/mytest.memfile"};
       
       $readmemh(memfilename, dut.imem.RAM);
     end
@@ -364,7 +364,7 @@ module dmem (input  logic        clk, we,
       input  logic [31:0] a, wd,
       output logic [31:0] rd);
   
-  logic [31:0] 		 RAM[255:0];
+  logic [31:0] 		 RAM[1047:0];
   
   assign rd = RAM[a[31:2]]; // word aligned
   always_ff @(posedge clk)
