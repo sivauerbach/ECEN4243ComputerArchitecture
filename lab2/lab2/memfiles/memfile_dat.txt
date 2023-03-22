@@ -1,0 +1,15 @@
+addi x29, x0, 260
+addi x28, x0, 38
+addi x7, x0, 0
+addi x6, x0, 1
+addi x5, x0, 0
+beq x28, x0, 24
+add x7, x6, x5
+addi x5, x6, 0
+addi x6, x7, 0
+addi x28, x28, -1
+jal x0, -20
+sw x5, 0(x29)
+sw x6, 4(x29)
+lw x10, 0(x29)
+ecall

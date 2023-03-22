@@ -28,14 +28,14 @@
 module testbench();
 
   logic        clk;
-  logic        reset;
+  logic        reset, PCReady;
 
   logic [31:0] WriteData;
   logic [31:0] DataAdr;
-  logic        MemWrite;
+  logic        MemWrite, MemStrobe;
 
   // instantiate device to be tested
-  top dut(clk, reset, PCReady WriteData, DataAdr, MemWrite, MemStrobe);
+  riscvtop dut(clk, reset, WriteData, DataAdr, MemWrite, MemStrobe, PCReady);
 
   initial
     begin
@@ -47,7 +47,7 @@ module testbench();
       /* Main test file */
       //memfilename = {"../riscvtest/mytest.memfile"};
       
-      $readmemh(memfilename, dut.imem.RAM);
+      $readmemh(memfilename, dut.rvsimem.RAM);
     end
 
   
@@ -77,13 +77,14 @@ module testbench();
   //   end
 endmodule // testbench
 
-module riscvsingle (input  logic        clk, reset, PCReady,
+module riscvsingle (input  logic        clk, reset,
       output logic [31:0] PC,
       input  logic [31:0] Instr,
       output logic 	MemWrite,
       output logic [31:0] ALUResult, WriteData,
-      input  logic [31:0] ReadData
-      output logic 	MemStrobe);
+      input  logic [31:0] ReadData,
+      output logic 	MemStrobe,
+      input  logic  PCReady);
   
   logic 				ALUSrc, RegWrite, Zero, BranchYN;
   logic [1:0] 				ResultSrc, JumpType, PCSrc; 
@@ -115,7 +116,7 @@ module controller (input  logic [6:0] op,
       output logic       RegWrite, 
       output logic [1:0] JumpType,
       output logic [2:0] ImmSrc,
-      output logic [3:0] ALUControl
+      output logic [3:0] ALUControl,
       output logic       MemStrobe);
   
   logic [1:0] 			      ALUOp;
@@ -152,7 +153,7 @@ module maindec (input  logic [6:0] op,
   output logic 	   RegWrite,
   output logic [1:0] JumpType,
   output logic [2:0] ImmSrc,
-  output logic [1:0] ALUOp
+  output logic [1:0] ALUOp,
   output logic 	   MemStrobe);
   
   logic [13:0] 		   controls;
@@ -226,7 +227,7 @@ module aludec (
   
 endmodule // aludec
 
-module datapath (input  logic        clk, reset, PCReady
+module datapath (input  logic        clk, reset, PCReady,
     input  logic [1:0]  ResultSrc,
     input  logic [1:0]  PCSrc,
     input  logic 	      ALUSrc,
@@ -340,28 +341,29 @@ module mux3 #(parameter WIDTH = 8)
   
   endmodule // mux3
 
-module top (input  logic        clk, reset, PCReady
+module riscvtop (input  logic        clk, reset,
     output logic [31:0] WriteData, DataAdr,
-    output logic 	MemWrite, MemStrobe);
+    output logic 	MemWrite, MemStrobe,
+    input logic PCReady);
   
   logic [31:0] 		PC, Instr, ReadData;
   
   // instantiate processor and memories
-  riscvsingle rv32single (clk, reset, PCReady, PC, Instr, MemWrite, DataAdr,/*=ALUResult*/
-        WriteData, ReadData, MemStrobe);
-  imem imem (PC, Instr);
+  riscvsingle rv32single (clk, reset, PC, Instr, MemWrite, DataAdr,/*=ALUResult*/
+        WriteData, ReadData, MemStrobe, PCReady);
+  rvsimem rvsimem (PC, Instr);
   dmem dmem (clk, MemWrite, DataAdr, WriteData, ReadData);
   
-  endmodule // top
+  endmodule // riscvtop
 
-module imem (input  logic [31:0] a,
+module rvsimem (input  logic [31:0] a,
       output logic [31:0] rd);
   
   logic [31:0] 		 RAM[63:0];
   
   assign rd = RAM[a[31:2]]; // word aligned
   
-  endmodule // imem
+  endmodule // rvsimem
 
 module dmem (input  logic        clk, we,
       input  logic [31:0] a, wd,
